@@ -22,8 +22,16 @@ public class Test08 {
 		
 		//요금
 		int price = time / 10 * 1000;
+		
+		//시간
+		int hour = time / 60;
+		int minute = time % 60;
 		//출력
 		System.out.println("주차요금은 다음과 같습니다");
 		System.out.println(price);
+		
+		System.out.println("주차시간");
+		System.out.println(hour);
+		System.out.println(minute);
 	}
 }

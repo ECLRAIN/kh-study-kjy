@@ -1,7 +1,7 @@
 package data;
 import java.lang.*;
 public class Test03 {
-	public static void main(String[] args)
+	public static void main(String[] args) {
 		//변수(variable)를 사용해서 Test02를 개선
 	
 		//변수 준비
@@ -21,5 +21,5 @@ public class Test03 {
 		System.out.println(jjajangTotal);
 		System.out.println(champonTotal);
 		System.out.println(total);
-		
+	}
 }

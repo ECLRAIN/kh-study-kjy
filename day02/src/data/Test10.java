@@ -12,11 +12,16 @@ public class Test10 {
 		double b = 1.5;
 		System.out.println(a);
 		System.out.println(b);
-		
+		//1. 실수는 부정확하다
 		float c = 1.25484241894165184564f;
 		System.out.println(c);
 		double d = 1.2348748444784784848498498;
 		System.out.println(d);
+		//2. 실수가 하나라도 포함된 계산은 결과가 실수가 나온다
+		System.out.println(10 / 3); //정수-정수
+		System.out.println(10 / 3.0);//정수-실수
+		System.out.println(10 / 3f); //정수-실수
+		System.out.println(10 / 3d);//정수-실수
 	}
 
 }

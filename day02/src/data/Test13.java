@@ -6,7 +6,9 @@ public class Test13 {
 		int gasprice =1920;
 		int property = 50000;
 		//계산
-		int gaspriceTotal = property / gasprice;
-		System.out.println(gaspriceTotal);
+		float liter = (float)property / gasprice;
+		//출력
+		System.out.println("주유 가능한 용량");
+		System.out.println(liter);
 	}
 }

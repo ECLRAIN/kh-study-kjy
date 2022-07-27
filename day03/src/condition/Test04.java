@@ -14,8 +14,9 @@ public class Test04 {
 		if(age<=7 || age>=65){
 		System.out.println("무임승차 대상입니다");
 		}
-		//if(나이가 7살 초과 또는 65세 미만이라면) 
-		if(age>7 || age<65){
+		//if(나이가 7살 초과 또는 65세 미만이라면) if와 else는 세트
+		//if가 거짓말이면
+		else{
 		System.out.println("무임승차 대상이 아닙니다");
 		}
 		

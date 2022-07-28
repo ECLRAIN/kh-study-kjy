@@ -10,7 +10,7 @@ public class Test05 {
 		double m= cm/100;
 		double bmi=kg/(m*m);
 		//출력
-		if(bmi>)
+		
 		
 		
 		//Scanner sc=new Scanner(System.in);

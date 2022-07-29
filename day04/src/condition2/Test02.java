@@ -7,20 +7,20 @@ public class Test02 {
 		//스위치는 한권으로 묶어서
 int direction =4;
 		
-		switch(direction==2) {
-		case 2: System.out.println("아래로 한 칸 이동");
+	//	switch(direction==2) {
+	//	case 2: System.out.println("아래로 한 칸 이동");
 		
-		case : System.out.println(
-			System.out.println("왼쪽으로 한 칸 이동");
+	//	case : System.out.println(
+		//	System.out.println("왼쪽으로 한 칸 이동");
 		
-		else if(direction==6) 
-			System.out.println("오른쪽으로 한 칸 이동");
+	//	else if(direction==6) 
+	//		System.out.println("오른쪽으로 한 칸 이동");
 		
-		else if(direction==8) 
-			System.out.println("위쪽으로 한 칸 이동");
+	//	else if(direction==8) 
+	//		System.out.println("위쪽으로 한 칸 이동");
 		
-		else 
-			System.out.println("잘못된 입력");
+	//	else 
+		//	System.out.println("잘못된 입력");
 		}
 	}
-}
+//}

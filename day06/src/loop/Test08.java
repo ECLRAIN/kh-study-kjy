@@ -23,6 +23,6 @@ public class Test08 {
 		}
 		else {System.out.println("오답");}
 		
-
+sc.close();
 }
 }

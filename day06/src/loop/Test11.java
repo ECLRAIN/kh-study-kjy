@@ -9,7 +9,7 @@ public class Test11 {
 		int a= r.nextInt(6)+1;
 		int b= r.nextInt(6)+1;
 		
-		System.out.println(a+"+"+b);
+		System.out.println(a+" "+b);
 		count++;
 		if((a==5 && b==5) ||(a==6 && b==6)) {
 			break;

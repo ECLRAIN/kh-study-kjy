@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Test11 {
 	public static void main(String[] args) {
 		Scanner user = new Scanner(System.in);
-		System.out.println("구구단 첫단을 입력하세요");
+		System.out.print("구구단 첫단을 입력하세요: ");
 		int first = user.nextInt();
 
 		int count = 0;

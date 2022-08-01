@@ -20,6 +20,7 @@ public class Test06 {
 		System.out.println(num);		
 				
 		//2 Random 도구 사용
+		//-주의 랜덤은 클로즈가 없다 클로즈는 입출력에서만 나옴
 		Random r= new Random();
 		int num2=r.nextInt(10)+1;
 		System.out.println("num2="+num2);

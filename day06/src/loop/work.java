@@ -2,7 +2,7 @@ package loop;
 
 import java.util.Scanner;
 
-public class Test12 {
+public class work {
 	public static void main(String [] args) {
 		Scanner sc = new Scanner(System.in);
 

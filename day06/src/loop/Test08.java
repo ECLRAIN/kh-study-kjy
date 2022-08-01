@@ -1,7 +1,7 @@
 package loop;
 
-import java.util.Scanner;
 import java.util.Random;
+import java.util.Scanner;
 public class Test08 {
 	public static void main(String[] args) {
 //랜덤으로 구구단 문제를 하나 출제하고 사용자가 정답을 입력하면 

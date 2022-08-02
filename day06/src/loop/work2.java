@@ -30,7 +30,7 @@ public class work2 {
 		}
 		total++;
 		}
-		System.out.println(Level+"and"+total+"번 만에 성공했습니다");
+		System.out.println(Level+"레벨을"+total+"번 만에 성공했습니다");
 		}
 	}	
 

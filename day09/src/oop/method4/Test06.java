@@ -8,15 +8,15 @@ public class Test06 {
 		Menu d = new Menu();
 		
 		
-		a.setting("아메리카노", "음료", 2500, null);
+		a.setting("아메리카노", "음료", 2500, true);
 		
-		b.setting("모카라떼", "음료", 3500, null);
-		b.event="-";
+		b.setting("모카라떼", "음료", 3500, false);
 		
-		c.setting("치즈케이크", "디저트", 5000, null);
 		
-		d.setting("마카롱", "디저트", 3000, null);
-		d.event="-";
+		c.setting("치즈케이크", "디저트", 5000, true);
+		
+		d.setting("마카롱", "디저트", 3000, false);
+		
 		
 		
 		

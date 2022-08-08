@@ -25,14 +25,14 @@ public class Gun {
 		}
 		else {
 			System.out.println("빵야");
-			bullet--;
+			this.bullet--;
 		}
 	}
 	
 
 	//남은 총알을 프린트할것
 	public void print() {
-		System.out.println("남은 총알: "+bullet);
+		System.out.println("남은 총알: "+this.bullet);
 	}
 
 	

@@ -14,10 +14,11 @@ public class Test03 {
 		
 		if(System.getProperty("os.name").startsWith("Windows")) {
 			run.exec("notepad");//외부 환경에 notepad라는 명령을 전송해라
-			run.exec("calc");//계산기
-			run.exec("mspaint");//그림판
+			//run.exec("calc");//계산기
+			//run.exec("mspaint");//그림판
 		}
-		
-		//run.exec("open -a TextEdit.app");//mac
+		else if(System.getProperty("os.name").startsWith("Mac")) {
+			run.exec("open -a TextEdit.app");//mac
+		}
 	}
 }

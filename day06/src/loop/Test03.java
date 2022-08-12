@@ -3,25 +3,24 @@ package loop;
 import java.util.Scanner;
 
 public class Test03 {
-	public static void main(String [] args) {
-		//while은 종료 시점을 알 때 유용하게 사용할 수 있다
-		//자동 임포트 컨트롤 쉬프트 o
-		//ex 사용자가 0입력할 때까지 숫자를 반복적으로 입력받는 프로그램
-		//사용자에게 숫자를 입력받아서 입력한 숫자만큼 100에서 차감을 합니다
-		//계속적으로 입력받아서 감소시키다가 숫자가 음수가 되면 게임 오버 메세지를 띄우고 종료
-		//게임 오버 전까지 입력한 숫자의 개수를 출력해보세요
+	public static void main(String[] args) {
+		//do~while 반복문
+		//- 사용 빈도가 매우 낮음
+		//- 선 실행 후 검사
 		
 		
-		Scanner sc= new Scanner(System.in);
-		int count=0;
-		int total=100;
+		//ex : 0부터 100 사이의 숫자(올바른 점수)가 입력되면 종료하는 반복문
+		Scanner sc = new Scanner(System.in);
 		
-		while(true) {
-			System.out.println();
-			int number =sc.nextInt();
-			total-=number;
-					
+		int score;
+		do {
+			System.out.print("점수 : ");
+			score = sc.nextInt();
 		}
+		while(score < 0 || score > 100);
+		//while(잘못 입력했다면);
+		
+		System.out.println("입력된 점수는 "+score+"점 입니다");
 		
 		sc.close();
 	}

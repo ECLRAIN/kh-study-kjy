@@ -18,7 +18,7 @@ public class Test03 {
 		//검색
 		//q 피카츄가 list에 있는가
 		System.out.println(list.contains("피카츄"));
-		System.out.println(list.indexOf("이상해씨"));
+		System.out.println(list.indexOf("라이츄"));
 		//2번 위치에 들어있는것은 무엇인가
 		System.out.println(list.get(2));
 		System.out.println(list.remove("피카츄"));

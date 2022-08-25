@@ -5,7 +5,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 public class Test01 {
 	public static void main(String args) {
-		//목표 계정의 ?테이블 데이터 insert
+		//목표 khacademy계정의 soccer_ranking테이블 데이터 insert
 		//jdbc java database connectivity)
 		//구문 insert into soccer_ranking(rank, nation, score)
 		//values(4,'아르헨티나',1770.65)

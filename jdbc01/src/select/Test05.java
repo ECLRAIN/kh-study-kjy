@@ -13,7 +13,7 @@ public class Test05 {
 //	필드명은 데이터베이스 컬럼명과 동일하게 작성하세요
 		JdbcTemplate template = JdbcUtil.getTemplate();
 		
-		String sql= "select * FROM guest_book";
+		String sql= "select * FROM guest_book order by no asc";
 		
 		RowMapper<GuestBookDto> mapper = (rs, idx)-> {
 			

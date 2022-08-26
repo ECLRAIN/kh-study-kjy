@@ -1,7 +1,11 @@
 package select;
 
 public class GuestBookDto {
-	
+	//DTO data Transfer Object
+	//데이터베이스의 테이블 안에 있는 한 줄의 데이터를 저장하기 위한 클래스
+	//앞으로 만날 모든 테이블은 dto가 있어야 한다
+//	테이블봐 동일한 형태를 가짐
+//	POJO 클래스(Plaia old java Object)
 		private int no;
 		private String name;
 		private String memo;

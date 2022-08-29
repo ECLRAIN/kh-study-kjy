@@ -2,7 +2,9 @@ package book.dto;
 
 import java.sql.Date;
 
-public class Bookdto {
+import org.springframework.jdbc.core.RowMapper;
+
+public class BookDto {
 		private int book_serial;
 		private String book_name;
 		private String book_writer;
@@ -54,10 +56,23 @@ public class Bookdto {
 		}
 		@Override
 		public String toString() {
-			return "Bookdto [book_serial=" + book_serial + ", book_name=" + book_name + ", book_writer=" + book_writer
+			return "BookDto [book_serial=" + book_serial + ", book_name=" + book_name + ", book_writer=" + book_writer
 					+ ", book_publisher=" + book_publisher + ", book_price=" + book_price + ", book_genre=" + book_genre
 					+ ", creation_time=" + creation_time + "]";
 		}
-		
+		private static RowMapper<BookDto> mapper = (rs, idx)->{
+			BookDto bookDto = new BookDto();
+			bookDto.setBook_serial(rs.getInt("book_serial"));
+			bookDto.setBook_name(rs.getString("book_name"));
+			bookDto.setBook_writer(rs.getString("book_writer"));
+			bookDto.setBook_publisher(rs.getString("book_publisher"));
+			bookDto.setBook_price(rs.getInt("book_price"));
+			bookDto.setBook_genre(rs.getString("book_genre"));
+			bookDto.setCreation_time(rs.getDate("creation_time"));
+			return bookDto;
+		};
+		public static RowMapper<BookDto> getMapper() {
+			return mapper;
+		}
 		
 }

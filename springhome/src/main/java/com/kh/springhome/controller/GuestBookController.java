@@ -50,4 +50,9 @@ public class GuestBookController {
 		
 		return "guestbook/list";
 	}
+	@GetMapping("/detail")
+	public String detail(Model model, @RequestParam int no) {
+		model.addAttribute("dto",guestBookDao.selectOne(no));
+		return "guestbook/detail";
+	}
 }

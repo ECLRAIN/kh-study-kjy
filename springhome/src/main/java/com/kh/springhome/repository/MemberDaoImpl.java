@@ -29,27 +29,7 @@ public class MemberDaoImpl implements MemberDao{
 //			이메일, 우편번호, 기본주소, 상세주소, 포인트, 
 //			등급, 가입일, 로그인일시)
 //	values(?, ?, ?, ?, ?, ?, ?, ?, ?, 0, '일반', sysdate, null);
-	private RowMapper<MemberDto> mapper= new RowMapper<MemberDto>() {
-		
-		@Override
-		public MemberDto mapRow(ResultSet rs, int rowNum) throws SQLException {
-			MemberDto dto= new MemberDto();
-			dto.setMemberId(rs.getString("memberId"));
-			dto.setMemberPw(rs.getString("memberPw"));
-			dto.setMemberNick(rs.getString("memberNick"));
-			dto.setMemberBirth(rs.getDate("memberBirth"));
-			dto.setMemberTel(rs.getString("memberTel"));
-			dto.setMemberEmail(rs.getString("memberEmail"));
-			dto.setMemberPost(rs.getString("memberPost"));
-			dto.setMemberBaseAddress(rs.getString("memberBaseAddress"));
-			dto.setMemberDetailAddress(rs.getString("memberDetailAddress"));
-			dto.setMemberPoint(rs.getInt("memberPoint"));
-			dto.setMemberGrade(rs.getString("memberGrade"));
-			dto.setMemberJoin(rs.getDate("memberJoin"));
-			dto.setMemberLogin(rs.getDate("memberLogin"));
-			return dto;
-		}
-	};
+	
 	
 	@Override
 	public void insert(MemberDto memberDto) {
@@ -68,19 +48,39 @@ public class MemberDaoImpl implements MemberDao{
 		};
 		jdbcTemplate.update(sql, param);
 	}
-
+	
+	private RowMapper<MemberDto> mapper = new RowMapper<MemberDto>() {
+		@Override
+		public MemberDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+			MemberDto dto = new MemberDto();
+			dto.setMemberId(rs.getString("member_id"));
+			dto.setMemberPw(rs.getString("member_pw"));
+			dto.setMemberNick(rs.getString("member_nick"));
+			dto.setMemberBirth(rs.getDate("member_birth"));
+			dto.setMemberTel(rs.getString("member_tel"));
+			dto.setMemberEmail(rs.getString("member_email"));
+			dto.setMemberPost(rs.getString("member_post"));
+			dto.setMemberBaseAddress(rs.getString("member_base_address"));
+			dto.setMemberDetailAddress(rs.getString("member_detail_address"));
+			dto.setMemberPoint(rs.getInt("member_point"));
+			dto.setMemberJoin(rs.getDate("member_join"));
+			dto.setMemberLogin(rs.getDate("member_login"));
+			dto.setMemberGrade(rs.getString("member_grade"));
+			return dto;
+		}
+	};
+	
 	@Override
 	public List<MemberDto> selectList() {
-		String sql="select * from member";
+		String sql = "select * from member";
 		return jdbcTemplate.query(sql, mapper);
 	}
-
+	
 	@Override
 	public List<MemberDto> selectList(String type, String keyword) {
-		String sql="select * from member where(#1,?)>0";
-		sql=sql.replace("#1", type);
-		Object[] param= {keyword};
-		return jdbcTemplate.query(sql, mapper,param);
+		String sql = "select * from member where instr(#1, ?) > 0 order by #1 asc";
+		sql = sql.replace("#1", type);
+		Object[] param = {keyword};
+		return jdbcTemplate.query(sql, mapper, param);
 	}
-	
 }

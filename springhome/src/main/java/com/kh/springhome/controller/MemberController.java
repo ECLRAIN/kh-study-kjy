@@ -36,17 +36,19 @@ public class MemberController {
 //		return "/WEB-INF/views/member/joinFinish.jsp";
 		return "member/joinFinish";
 	}
+	
 	@GetMapping("/list")
-	public String list(Model model, 
-			@RequestParam(required = false) String type,
-			@RequestParam(required = false) String keyword) {
-boolean isSearch = type != null && keyword != null;
-if(isSearch) {//검색
-	model.addAttribute("list",memberDao.selectList(type,keyword));
-}
-else {
-	model.addAttribute("list",memberDao.selectList());
-}
-return "member/list";
-}
+	public String list(Model model,
+				@RequestParam(required = false) String type,
+				@RequestParam(required = false) String keyword) {
+		boolean isSearch = type != null && keyword != null;
+		if(isSearch) {
+			model.addAttribute("list", memberDao.selectList(type, keyword));
+		}
+		else {
+			model.addAttribute("list", memberDao.selectList());
+		}
+		return "member/list";
+	}
+	
 }

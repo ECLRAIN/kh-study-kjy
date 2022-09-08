@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!--${list} 여기서 list는 컨트롤러의 리스트를 불러내는거임  -->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +25,9 @@
 				<c:forEach var="dto" items="${list}">
 				<tr>
 					<td>${dto.no}</td>
-					<td>${dto.name}</td>
+					<td>
+						<a href="detail?no=${dto.no}">${dto.name}</a>
+					</td>
 					<td>${dto.type}</td>
 				</tr>
 				</c:forEach>
@@ -34,3 +36,8 @@
 	</div>
 </body>
 </html>
+
+
+
+
+

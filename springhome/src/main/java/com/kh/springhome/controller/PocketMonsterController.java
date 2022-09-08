@@ -64,4 +64,40 @@ public class PocketMonsterController {
 		return "pocketmon/detail";
 	}
 	
+//	수정 기능
+	@GetMapping("/edit")
+	public String edit(Model model, @RequestParam int no) {
+		PocketMonsterDto dto = pocketMonsterDao.selectOne(no);
+		model.addAttribute("dto", dto);
+//		return "/WEB-INF/views/pocketmon/edit.jsp";
+		return "pocketmon/edit";
+	}
+	
+	@PostMapping("/edit")
+	public String edit(@ModelAttribute PocketMonsterDto dto) {
+//		DB 수정 처리
+		boolean result = pocketMonsterDao.update(dto);
+		if(result) {
+			return "redirect:detail?no="+dto.getNo();
+		}
+		else {
+			return "redirect:edit_fail";
+		}
+	}
+	
+	@GetMapping("/edit_fail")
+	public String editFail() {
+//		return "/WEB-INF/views/pocketmon/editFail.jsp";
+		return "pocketmon/editFail";
+	}
 }
+
+
+
+
+
+
+
+
+
+

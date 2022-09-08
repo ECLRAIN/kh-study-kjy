@@ -28,22 +28,7 @@ public class GuestBookDaoImpl implements GuestBookDao{
 			return dto;
 		}
 	};
-	private ResultSetExtractor<GuestBookDto> extractor = new ResultSetExtractor<GuestBookDto>() {
-		
-		@Override
-		public GuestBookDto extractData(ResultSet rs) throws SQLException, DataAccessException {
-			if(rs.next()) {
-				GuestBookDto dto = new GuestBookDto();
-				dto.setNo(rs.getInt("no"));
-				dto.setName(rs.getString("name"));
-				dto.setMemo(rs.getString("memo"));
-				return dto;
-			}
-			else {
-				return null;				
-			}
-		}
-	};
+
 	@Override
 	public void insert(GuestBookDto dto) {
 		String sql = "insert into guest_book(no, name, memo) "
@@ -67,14 +52,42 @@ public class GuestBookDaoImpl implements GuestBookDao{
 		Object[] param = {keyword};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
+	
+	private ResultSetExtractor<GuestBookDto> extractor = new ResultSetExtractor<GuestBookDto>() {
+		@Override
+		public GuestBookDto extractData(ResultSet rs) throws SQLException, DataAccessException {
+			if(rs.next()) {
+				GuestBookDto dto = new GuestBookDto();
+				dto.setNo(rs.getInt("no"));
+				dto.setName(rs.getString("name"));
+				dto.setMemo(rs.getString("memo"));
+				return dto;
+			}
+			else {
+				return null;
+			}
+		}
+	};
 
 	@Override
 	public GuestBookDto selectOne(int no) {
-		String sql="select * from guest_book where no=?";
-		Object[] param= {no};
+		String sql = "select * from guest_book where no = ?";
+		Object[] param = {no};
 		return jdbcTemplate.query(sql, extractor, param);
 	}
+	
+	@Override
+	public boolean update(GuestBookDto dto) {
+		String sql = "update guest_book "
+							+ "set name=?, memo=? "
+							+ "where no=?";
+		Object[] param = {
+				dto.getName(), dto.getMemo(), dto.getNo()
+		};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
 }
+
 
 
 

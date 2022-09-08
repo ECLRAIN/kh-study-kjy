@@ -86,6 +86,17 @@ public class MemberController {
 //		return "/WEB-INF/views/member/changeFail.jsp";
 		return "member/changeFail";
 	}
+	//삭제기능
+	@GetMapping("/delete")
+	public String delete(@RequestParam String memberId) {
+		boolean result=memberDao.delete(memberId);
+		if(result) {
+			return "redirect:list";
+		}
+		else {
+			return "pocketmon/editFail.jsp";
+		}
+	}
 	
 }
 

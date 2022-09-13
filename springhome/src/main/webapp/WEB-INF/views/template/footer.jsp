@@ -15,6 +15,10 @@
 				세션ID : ${pageContext.session.getId()} <br>
 				신규세션 : ${pageContext.session.isNew()} <br>
 			--%>
+			loginID: ${sessionScope.loginId}<br>
+			로그인: ${sessionScope.loginId!=null}<br>
+			mg: ${sessionScope.mg}<br>
+			관리자: ${sessionScope.mg=='관리자'}
 		</div>
     </body>
 </html>

@@ -88,16 +88,19 @@ public class GuestBookController {
 //		return "/WEB-INF/views/guestbook/editFail.jsp";
 		return "guestbook/editFail";
 	}
+	
+//	삭제
 	@GetMapping("/delete")
 	public String delete(@RequestParam int no) {
-		boolean result=guestBookDao.delete(no);
+		boolean result = guestBookDao.delete(no);
 		if(result) {
 			return "redirect:list";
 		}
 		else {
-			return "redirect:editFail";
+			return "guestbook/editFail";
 		}
 	}
+	
 }
 
 

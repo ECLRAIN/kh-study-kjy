@@ -86,7 +86,6 @@ public class PocketMonsterDaoImpl implements PocketMonsterDao{
 		Object[] param = {no};
 		return jdbcTemplate.update(sql, param) > 0;
 	}
-	
 }
 
 

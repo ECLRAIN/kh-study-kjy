@@ -79,7 +79,7 @@
 		</c:when>
 		<c:otherwise>
 			<!-- 회원용 메뉴 -->
-			<h2><a href="member/password">비밀번호 변경</a></h2>
+			<h2><a href="password">비밀번호 변경</a></h2>
 			<h2><a href="#">개인정보 변경</a></h2>
 			<h2><a href="#">회원 탈퇴</a></h2>
 		</c:otherwise>
@@ -88,7 +88,3 @@
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
-
-
-
-

@@ -10,9 +10,11 @@
 
 <h1>개인정보 변경</h1>
 
-<form action="information" method="post">
-	<input type="text" value="memberNick" value="${memberDto.memberNick}">
+<form action="information" method="post"> <!--  액션이 인포메이션으로 보낸다는 것 -->
+	
+	닉네임: <input type="text" value="memberNick" required value="${memberDto.memberNick}">
 	<br>
+	비밀번호: <input type="password" value="">
 	<button type="submit">변경하기</button>
 </form>
 	

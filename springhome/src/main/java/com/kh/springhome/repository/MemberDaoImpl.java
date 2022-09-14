@@ -161,6 +161,17 @@ public class MemberDaoImpl implements MemberDao{
 			return jdbcTemplate.update(sql, param) > 0;
 		}
 
+	@Override
+	public boolean changeInformation(MemberDto memberDto) {
+	
+		String sql="update member set "
+				+ "member_nick = ?, "
+				+ "member_tel = ?, "
+				+ "member_birth = ?, "
+				+ "";
+		return false;
+	}
+
 	
 }
 

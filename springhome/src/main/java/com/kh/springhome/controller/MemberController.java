@@ -207,5 +207,13 @@ public class MemberController {
 	public String passwordResult() {
 		return "member/passwordResult";
 	}
-	
+	@GetMapping("/information")
+	public String information() {
+		return "/";
+	}
+//	@PostMapping("/information")
+//	public String information() { 
+	//if()
+//		return "redirect:information?error";
+//	}
 }

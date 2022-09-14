@@ -180,6 +180,15 @@ public class MemberDaoImpl implements MemberDao{
 		};
 		return jdbcTemplate.update(sql, param) > 0;
 	}
+
+	@Override
+	public boolean updateLoginTime(String memberId) {
+		String sql="update member set member_login=sysdate where member_id=?";
+		Object[] param= {memberId};
+		
+		return jdbcTemplate.update(sql,param)>0;
+	}
+	
 }
 
 

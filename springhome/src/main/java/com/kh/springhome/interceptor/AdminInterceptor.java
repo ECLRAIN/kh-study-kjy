@@ -7,16 +7,18 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import com.kh.springhome.constant.SessionConstant;
+
 @Component
 public class AdminInterceptor implements HandlerInterceptor{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-
+		
 		HttpSession session = request.getSession();
-		String mg = (String)session.getAttribute("mg");
+		String mg = (String)session.getAttribute(SessionConstant.GRADE);
 		boolean admin = mg != null && mg.equals("관리자");
-
+		
 		if(admin) {//관리자라면
 			return true;//통과
 		}
@@ -27,3 +29,8 @@ public class AdminInterceptor implements HandlerInterceptor{
 		}
 	}
 }
+
+
+
+
+

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import com.kh.springhome.constant.SessionConstant;
+
 //인터셉터(Interceptor)
 //- 서버의 처리 과정에 개입해서 원하는 방향의 작업을 추가하는 도구
 //- 간섭 객체
@@ -39,7 +41,7 @@ public class MemberInterceptor implements HandlerInterceptor{
 		
 		//1. 세션이 없을 때는 HttpServletRequest에서 획득 가능
 		HttpSession session = request.getSession();
-		String loginId = (String) session.getAttribute("loginId");
+		String loginId = (String) session.getAttribute(SessionConstant.ID);
 		if(loginId == null) {//비회원. 2-(2)
 			//선택지는 2가지가 있다
 			
@@ -58,3 +60,5 @@ public class MemberInterceptor implements HandlerInterceptor{
 	}
 	
 }
+
+

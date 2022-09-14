@@ -181,3 +181,10 @@ public class MemberDaoImpl implements MemberDao{
 		return jdbcTemplate.update(sql, param) > 0;
 	}
 }
+
+
+
+
+
+
+

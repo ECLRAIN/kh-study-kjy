@@ -1,8 +1,7 @@
 package com.kh.springhome.constant;
 
+//세션에서 자주 사용하는 값들의 이름을 보관
 public interface SessionConstant {
-	//상수 보관 원래는 퍼블릭 스태틱 파이널이 앞에 붙는다
-	String ID="loginId";
-	String GRADE="mg";
-	//한방에 찾는 법 컨트롤 h 
+	String ID = "loginId";
+	String GRADE = "mg";
 }

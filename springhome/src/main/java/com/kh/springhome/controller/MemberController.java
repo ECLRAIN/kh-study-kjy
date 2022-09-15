@@ -135,8 +135,10 @@ public class MemberController {
 			//- session.removeAttribute("이름");
 			session.setAttribute(SessionConstant.ID, inputDto.getMemberId());
 			session.setAttribute(SessionConstant.GRADE, findDto.getMemberGrade());
+			
 			//로그인 시간을 갱신시키는 작업
 			memberDao.updateLoginTime(inputDto.getMemberId());
+			
 			return "redirect:/";
 		}
 		else {//b
@@ -286,3 +288,12 @@ public class MemberController {
 	}
 	
 }
+
+
+
+
+
+
+
+
+

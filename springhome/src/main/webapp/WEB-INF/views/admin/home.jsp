@@ -8,3 +8,4 @@
 <h1>관리자 페이지</h1>
 
 <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>
+

@@ -17,10 +17,17 @@ public class Calculator {
 		this.right = right;
 	}
 	public int getAnswer() {
-		return this.left*this.right;
+		return this.left * this.right;
 	}
+	
 	public Calculator(int left, int right) {
 		this.setLeft(left);
 		this.setRight(right);
 	}
+	
 }
+
+
+
+
+

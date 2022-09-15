@@ -1,34 +1,48 @@
 package api.lang.string;
 
-import java.util.Scanner;
-
 public class Test05 {
-	public static void main(String [] args) {
-		//입력
-	    Scanner sc= new Scanner(System.in);
-		String a="바나다가";
-		System.out.println(a);
+	public static void main(String[] args) {
+		//준비
+		String given = "바나나";
+		String input = "나이스";
 		
-		System.out.print("");
-		String user=sc.next();
-		sc.close();
 		//계산
-		//System.out.println(user.charAt(0));
-		//char a=a.charAt(2)
-		//boolean game=a.charAt(a.length()-1)==user.charAt(0);
-		//System.out.println(a.substring(a.length(3)));
-//		System.out.println(a.substring(3));
-//		System.out.println(a.length());
-		System.out.println(user.charAt(0));
-		boolean game=a.substring(a.length()-1).equals(user.charAt(0));
+		//- given과 input이 이어집니까?
 		
-		if(game==true) {
-			System.out.println("성공");
+		//(1) .charAt() 사용
+		//boolean good = given의 마지막글자와 input의 첫글자가 같습니까;
+		//boolean good = given.charAt(2) == input.charAt(0);
+		//boolean good = given.charAt(given.length()-1) == input.charAt(0);
+		
+		//(2) substring(), equals() 사용
+		//boolean good = given.substring(2).equals(input.substring(0, 1));
+		//boolean good = given.substring(given.length()-1).equals(input.substring(0, 1));
+		
+		//(3) substring(), startsWith() 사용
+		//boolean good = input이 given의 마지막 글자로 시작합니까;
+		//boolean good = input.startsWith(given의 마지막 글자);
+		//boolean good = input.startsWith(given.substring(2));
+		//boolean good = input.startsWith(given.substring(given.length()-1));
+		
+		//(4) substring(), indexOf() 사용
+		//boolean good = given의 마지막 글자가 input의 처음(0)에 위치한다면;
+		//boolean good = input.indexOf(given의 마지막 글자) == 0;
+		//boolean good = input.indexOf(given.charAt(given.length()-1)) == 0;
+		boolean good = input.indexOf(given.substring(given.length()-1)) == 0;
+		
+		//출력
+		if(good) {
+			System.out.println("이어져");
 		}
 		else {
-			System.out.println("실패");
+			System.out.println("안이어져");
 		}
-
-		
 	}
 }
+
+
+
+
+
+
+

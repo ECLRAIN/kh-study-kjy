@@ -5,23 +5,54 @@ import java.util.TreeSet;
 
 public class Test07 {
 	public static void main(String[] args) {
-		Set<String> man= new TreeSet<>();
-		Set<String> woman= new TreeSet<>();
+		Set<String> a = Set.of("이상한 나라의 수학자", "더 배트맨", "인민을 위해 복무하라", "블랙라이트");
+		Set<String> b = Set.of("더 배트맨", "스파이더맨 : 노웨이 홈", "블랙라이트", "우리가 사랑이라고 믿는 것");
 		
-		man.add("이상한 나라의 수학자");		woman.add("더 배트맨");
-		man.add("더 배트맨");						woman.add("스파이더맨");
-		man.add("인민을 위해 복무해라");		woman.add("노웨이 홈");
-		man.add("블랙라이트");						woman.add("우리가 사랑이라고 믿는 것");
-		//교집합
-		Set<String> q1= new TreeSet<>();
-		q1.addAll(man);
-		q1.retainAll(woman);
-		System.out.println(q1);
-		//차집합
-		Set<String> q2= new TreeSet<>();
-		q2.addAll(man);
-		q2.removeAll(woman);
-		System.out.println(q2+"철수");
+		//System.out.println("철수 : "+a);
+		//System.out.println("영희 : "+b);
 		
+		//(Q1) - 둘 다 본 영화
+		Set<String> c = new TreeSet<>();
+		c.addAll(a);
+		c.retainAll(b);
+		System.out.println("둘 다 본 영화");
+		for(String name : c) {
+			System.out.println("-> "+name);
+		}
+		
+		//(Q2) - 한 명만 본 영화(철수만 or 영희만)
+		//1. (A ∪ B) - (A ∩ B)
+		Set<String> d = new TreeSet<>();
+		d.addAll(a);
+		d.addAll(b);
+		d.removeAll(c);
+		System.out.println("한 명만 본 영화");
+		for(String name : d) {
+			System.out.println("-> "+ name);
+		}
+		
+		//2. (A - B) ∪ (B - A) 
+		Set<String> e = new TreeSet<>();
+		e.addAll(a);
+		e.removeAll(b);
+		
+		Set<String> f = new TreeSet<>();
+		f.addAll(b);
+		f.removeAll(a);
+		
+		Set<String> g = new TreeSet<>();
+		g.addAll(e);
+		g.addAll(f);
+		System.out.println("한 명만 본 영화");
+		for(String name : g) {
+			System.out.println("-> "+ name);
+		}
 	}
 }
+
+
+
+
+
+
+

@@ -4,7 +4,7 @@ public class Student {
 	//field
 	String name;
 	int score;
-
+	
 	//method
 	void print() {
 		System.out.println(this.name);
@@ -40,10 +40,23 @@ public class Student {
 			return "불합격";
 		}
 	}
-
+	
 	//constructor
 	Student(String name, int score){
 		this.setName(name);
 		this.setScore(score);
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

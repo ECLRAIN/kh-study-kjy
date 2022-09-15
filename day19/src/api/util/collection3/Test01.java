@@ -2,7 +2,6 @@ package api.util.collection3;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class Test01 {
 	public static void main(String[] args) {
@@ -46,3 +45,12 @@ public class Test01 {
 		System.out.println(people.isEmpty());
 	}
 }
+
+
+
+
+
+
+
+
+

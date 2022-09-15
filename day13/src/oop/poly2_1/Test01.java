@@ -5,10 +5,10 @@ public class Test01 {
 		//준비
 		//int type = 1 or 2 or 3 or 4;
 		//int action = 1 or 2 or 3 or 4;
-
+		
 		int type = 4;
 		int action = 1;
-
+		
 		//type을 이용해서 전화기(Phone)를 하나 생성 (업캐스팅 : 하위요소를 상위형태로 보관)
 		Phone phone;
 		if(type == 1) {
@@ -24,7 +24,7 @@ public class Test01 {
 			phone = new IPhone13();
 		}
 		System.out.println(phone);
-
+		
 		if(action == 1) {
 			phone.camera();
 		}
@@ -39,3 +39,11 @@ public class Test01 {
 		}
 	}
 }
+
+
+
+
+
+
+
+

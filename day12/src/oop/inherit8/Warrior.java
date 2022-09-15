@@ -1,7 +1,8 @@
 package oop.inherit8;
 
-public class Warrior extends RPG{
-	ppublic Warrior(String id) {
+public class Warrior extends Player{
+
+	public Warrior(String id) {
 		super(id);
 	}
 	public Warrior(String id, int level) {

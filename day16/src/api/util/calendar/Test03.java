@@ -6,23 +6,23 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Test03 {
-	public static void main(String [] args) {
-		//오늘로부터 100일 뒤가 몇일인지 계산후에 출력
-
+	public static void main(String[] args) {
+		//기념일 관리 프로그램
 		Calendar c = Calendar.getInstance();
-		//System.out.println(c);
 		
-		//int date=c.get(Calendar.DATE);
-		//c.set(Calendar.DATE, date+99);
+		//계산
+		int date = c.get(Calendar.DATE);
+		c.set(Calendar.DATE, date + 99);
+		//c.add(Calendar.DATE, 99);
 		
-		c.add(Calendar.DATE, 99);
-//		int day = c.get(Calendar.DAY_OF_MONTH);
-//		System.out.println(day+100);
-		
+		//출력
 		Date d = c.getTime();
-//		Format f1 = new SimpleDateFormat("yyyy-MM-dd");
-//		System.out.println(f1.format(d));
-		Format f2 = new SimpleDateFormat("yyyy-MM-dd");
-		System.out.println(f2.format(d));
+		Format f = new SimpleDateFormat("y년 M월 d일 E요일");
+		System.out.println("100일 - " + f.format(d));
 	}
 }
+
+
+
+
+

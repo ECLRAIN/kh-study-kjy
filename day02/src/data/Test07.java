@@ -2,7 +2,7 @@ package data;
 import java.lang.*;
 public class Test07 {
 	public static void main(String[] args) {
-		//(Q) 1시간 40분+2시간 30분 = ?
+		//(Q) 1시간 40분 + 2시간 30분 = ?
 		
 		//준비
 		int hour1 = 1;
@@ -17,12 +17,12 @@ public class Test07 {
 		//System.out.println(time2);
 		
 		int time = time1 + time2;
-		int hour = time1 / 60;
-		int minute = time2 % 60;
+		int hour = time / 60;
+		int minute = time % 60;
 		
+		//출력
 		System.out.println(hour);
 		System.out.println(minute);
-		
 		
 	}
 }

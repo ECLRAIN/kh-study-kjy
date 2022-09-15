@@ -25,3 +25,13 @@ public class Test02 {
 		List<String> f = new LinkedList<>();
 	}
 }
+
+
+
+
+
+
+
+
+
+

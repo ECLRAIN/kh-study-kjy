@@ -42,3 +42,13 @@ public class Test02 {
 		System.out.println(System.getProperty("java.specification.version"));
 	}
 }
+
+
+
+
+
+
+
+
+
+

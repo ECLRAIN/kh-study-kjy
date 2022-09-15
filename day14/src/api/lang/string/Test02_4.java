@@ -5,17 +5,17 @@ import java.util.Scanner;
 public class Test02_4 {
 	public static void main(String[] args) {
 		//준비
-		String[][] db = new String[][] {
-			{"khacademy1", "student"},
-			{"khacademy2", "student"},
-			{"khacademy3", "student"},
-			{"khacademy4", "student"},
-			{"khacademy5", "student"},
-			{"khacademy6", "student"},
-			{"khacademy7", "student"},
-			{"khacademy8", "student"},
-			{"khacademy9", "student"},
-			{"khacademy10", "student"}
+		Member[] db = new Member[] {
+			new Member("khacademy1", "student"),
+			new Member("khacademy2", "student"),
+			new Member("khacademy3", "student"),
+			new Member("khacademy4", "student"),
+			new Member("khacademy5", "student"),
+			new Member("khacademy6", "student"),
+			new Member("khacademy7", "student"),
+			new Member("khacademy8", "student"),
+			new Member("khacademy9", "student"),
+			new Member("khacademy10", "student")
 		};
 		
 		Scanner sc = new Scanner(System.in);
@@ -25,14 +25,14 @@ public class Test02_4 {
 		String userPassword = sc.next();
 		sc.close();
 		
+		Member user = new Member(userId, userPassword);
+		
 		//계산
 		boolean isLogin = false;
-		CHECK:for(int i=0; i < db.length; i++) {
-			for(int k=0; k < db[i].length; k++) {
-				if(userId.equals(db[i][0]) && userPassword.equals(db[i][1])) {
-					isLogin = true;
-					break CHECK;
-				}
+		for(int i=0; i < db.length; i++) {
+			if(db[i].equals(user)) {
+				isLogin = true;
+				break;
 			}
 		}
 		

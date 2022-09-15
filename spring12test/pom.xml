@@ -11,6 +11,7 @@
 	<groupId>com.kh</groupId>
 	<artifactId>spring12test</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>spring12test</name>
 	<description>study</description>
 	<properties>
@@ -43,28 +44,30 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 		
-		<!--jsp를 사용하기 위한 의존성  -->
+		<!-- JSP를 사용하기 위한 의존성 -->
 		<dependency>
-    	<groupId>javax.servlet</groupId>
-    	<artifactId>jstl</artifactId>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>jstl</artifactId>
 		</dependency>
-		<!--내장 서버에 jsp 처리 관련 규칙을 알려주는 의존성  -->
+		<!-- 내장 서버에 JSP 처리 관련 규칙을 알려주는 의존성 -->		
 		<dependency>
-    	<groupId>org.apache.tomcat.embed</groupId>
-   	 	<artifactId>tomcat-embed-jasper</artifactId>
+		    <groupId>org.apache.tomcat.embed</groupId>
+		    <artifactId>tomcat-embed-jasper</artifactId>
 		</dependency>
 		<dependency>
-    	<groupId>org.projectlombok</groupId>
-    	<artifactId>lombok</artifactId>
-    	
-    	<scope>provided</scope>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
 		</dependency>
-		
-		
 	</dependencies>
 
 	<build>
@@ -72,6 +75,14 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

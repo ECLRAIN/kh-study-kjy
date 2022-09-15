@@ -1,6 +1,6 @@
 package oop.inherit3;
 
-public class Whale extends Browser{
+public class Whale extends Browser {
 	public void papago() {
 		System.out.println("파파고 번역 실행");
 	}

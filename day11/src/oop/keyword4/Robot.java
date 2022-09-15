@@ -1,8 +1,7 @@
 package oop.keyword4;
 
 public class Robot {
-	
-	//1회성 계산때 static을 쓴다
+
 	public static int squared(int value) {
 		return value * value;
 	}
@@ -35,4 +34,12 @@ public class Robot {
 	public static double circle(int radius) {
 		return 3.14 * radius * radius;
 	}
+	
 }
+
+
+
+
+
+
+

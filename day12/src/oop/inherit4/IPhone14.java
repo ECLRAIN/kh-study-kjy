@@ -1,6 +1,7 @@
 package oop.inherit4;
 
-public class IPhone14 extends Phone{
+public class IPhone14 extends Phone {
+	
 	public void print() {
 		System.out.println("번호 : " + number);
 		System.out.println("번호 : " + this.number);
@@ -20,3 +21,12 @@ public class IPhone14 extends Phone{
 		super(number);//부모 클래스의 생성자로 number를 전달
 	}
 }
+
+
+
+
+
+
+
+
+

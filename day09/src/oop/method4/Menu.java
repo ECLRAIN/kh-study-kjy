@@ -1,32 +1,42 @@
 package oop.method4;
 
 public class Menu {
-	//멤버필드
+	//field
 	String name;
-	String menu;
 	int price;
+	String type;
 	boolean event;
-	//멤버 메소드
-	//보이드 셋팅을 2개이상쓰면 3개짜리면 3개에 4개짜리는 4개
-	void setting(String name,String menu,int price) {
-		this.setting(name, menu, price, false);
-	}
 	
-	void setting(String name,String menu,int price, boolean event){
-		this.name=name;
-		this.menu=menu;
-		this.price=price;
-		this.event=event;
+	//method
+	
+	//method overloading : 같은 이름으로 메소드를 여러 개 준비하는 것
+	void setting(String name, int price, String type) {
+		this.setting(name, price, type, false);
+	}
+	void setting(String name, int price, String type, boolean event) {
+		this.name = name;
+		this.price = price;
+		this.type = type;
+		this.event = event;
 	}
 	void print() {
-		System.out.println("메뉴정보");
-		System.out.println("이름: "+this.name);
-		System.out.println("분류: "+this.menu);
-		System.out.println("가격: "+this.price);
-		
-		if(this.event==true) {
-			System.out.println("행사 가격");
+		System.out.println("<메뉴 정보>");
+		System.out.println("이름 : " + this.name);
+		System.out.println("구분 : " + this.type);
+		System.out.print("가격 : " + this.price+"원");
+		if(this.event == true) {
+			System.out.print("( 행사 상품 )");
 		}
+		System.out.println();
+		//System.out.println("행사중 : " + this.event);
 	}
-	
 }
+
+
+
+
+
+
+
+
+

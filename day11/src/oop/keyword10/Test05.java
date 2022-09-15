@@ -1,18 +1,15 @@
 package oop.keyword10;
 
-import java.util.Random;
+import java.util.Calendar;
 
 public class Test05 {
-public static void main(String[] args) {
+	public static void main(String[] args) {
+		//Java의 상수
+		System.out.println(Long.MAX_VALUE);
+		System.out.println(Long.BYTES);
 		
-		//동전 던지기
-		Random r = new Random();
-		int coin = r.nextInt(2);
-		if(coin == Coin.FRONT) {
-			System.out.println("앞");
-		}
-		else {
-			System.out.println("뒤");
-		}
+		System.out.println(Math.PI);
+		
+		System.out.println(Calendar.JANUARY);
 	}
 }

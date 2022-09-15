@@ -2,11 +2,11 @@ package api.lang.object;
 
 import java.util.Objects;
 
-public class Student {
+public class Student /*extends Object*/{
 	private String name;
 	private int score;
 	public Student() {
-		
+		super();
 	}
 	public Student(String name, int score) {
 		super();
@@ -40,5 +40,9 @@ public class Student {
 		Student other = (Student) obj;
 		return Objects.equals(name, other.name) && score == other.score;
 	}
-	
 }
+
+
+
+
+

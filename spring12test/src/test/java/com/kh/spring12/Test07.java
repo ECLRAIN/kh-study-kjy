@@ -11,17 +11,23 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
-@AutoConfigureMockMvc // mvc는 모델 뷰 컨트롤러임 
+@AutoConfigureMockMvc
 public class Test07 {
-
-		@Autowired
-		private MockMvc mockMvc;
-		
-		@Test
-		public void pocketMonsterInsertTest() throws Exception{
-			mockMvc.perform(post("/pocketmon/insert").param("no", "77").param("name", "디그다").param("type", "땅")) //http 통신의 규제땜에 string말곤 데이터 형태를 못 씀
-							.andExpect(status().is3xxRedirection())
-							.andDo(print())
-							.andReturn();
-		}
+	
+	@Autowired
+	private MockMvc mockMvc;
+	
+	@Test
+	public void pocketMonsterInsertTest() throws Exception {
+		mockMvc.perform(
+							post("/pocketmon/insert")
+									.param("no", "77")
+									.param("name", "디그다")
+									.param("type", "풀")
+						)
+						.andExpect(status().is3xxRedirection())
+						.andDo(print())
+						.andReturn();
+	}
+	
 }

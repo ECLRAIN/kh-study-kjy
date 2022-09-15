@@ -2,7 +2,6 @@ package api.util.collection3;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class Test02 {
 	public static void main(String[] args) {
@@ -14,12 +13,8 @@ public class Test02 {
 		database.put("admin", "admin1234");
 		
 		//아이디, 비밀번호 입력
-		Scanner sc = new Scanner(System.in);
-		System.out.print("아이디 : ");
-		String id = sc.nextLine();
-		System.out.print("비밀번호 : ");
-		String password = sc.nextLine();
-		sc.close();
+		String id = "testuser";
+		String password = "testuser1234";
 		
 		//판정
 		//boolean isLogin = 아이디 존재 && 비밀번호 일치;
@@ -36,3 +31,14 @@ public class Test02 {
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+

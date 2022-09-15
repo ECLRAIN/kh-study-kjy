@@ -1,11 +1,12 @@
 package condition2;
 import java.lang.*;
-import java.util.Scanner;
 public class Test03 {
 	public static void main(String[] args) {
-	
-		int month=3;
 		
+		//준비
+		int month = 3;
+		
+		//출력
 		switch(month) {
 		case 1:
 			System.out.println("31일");
@@ -42,9 +43,8 @@ public class Test03 {
 			break;
 		case 12:
 			System.out.println("31일");
-			break;	
-            }
-	
+			break;
+		}
 		
 	}
 }

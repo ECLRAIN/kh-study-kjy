@@ -1,10 +1,13 @@
 package oop.inherit6;
 
-public class Galaxy extends Phone {
+public class Galaxy extends Phone{
+
 	public Galaxy(String number, String color) {
-		super(number,color);
+		super(number, color);
 	}
+	
 	public void samsungPay() {
-		System.out.println("???삼성페이 기능 실행");
+		System.out.println("????의 삼성페이 기능 실행!");
 	}
+	
 }

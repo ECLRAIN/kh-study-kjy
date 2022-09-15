@@ -4,7 +4,6 @@ public class Phone {
 	
 	protected String number;
 	protected String color;
-	
 	public String getNumber() {
 		return number;
 	}
@@ -18,20 +17,18 @@ public class Phone {
 		this.color = color;
 	}
 	
-	
-	public void call() {
-		System.out.println("??? 전화 기능 실행");
-	}
-	public void sms() {
-		System.out.println("??? 문자 기능 실행");	
-	}
-	
-	
 	public Phone(String number, String color) {
-		
 		this.number = number;
 		this.color = color;
 	}
 	
-	
+	public void call() {
+		System.out.println("????의 통화 기능 실행!");
+	}
+	public void sms() {
+		System.out.println("????의 문제 기능 실행!");
+	}
 }
+
+
+

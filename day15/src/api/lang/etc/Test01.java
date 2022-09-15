@@ -28,3 +28,15 @@ public class Test01 {
 		System.out.println(Math.ceil(a));//올림
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+

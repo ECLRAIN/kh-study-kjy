@@ -26,3 +26,10 @@ public class Test01 {
 		e.reservation();
 	}
 }
+
+
+
+
+
+
+

@@ -8,6 +8,6 @@ public class Test01 {
 		System.out.println(2022-12-23);//계산식 취급
 		
 		System.out.println(2000);//숫자
-		//System.out.println(hello);error
+		//System.out.println(hello);//error
 	}
 }

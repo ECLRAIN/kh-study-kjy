@@ -12,89 +12,157 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.springhome.entity.BoardDto;
-
-
-
+import com.kh.springhome.vo.BoardListSearchVO;
 
 @Repository
-public class BoardDaoImpl implements BoardDao{
+public class BoardDaoImpl implements BoardDao {
+	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
+	@Override
+	public void insert(BoardDto boardDto) {
+		String sql = "insert into board("
+							+ "board_no, board_title, board_writer,"
+							+ "board_content, board_head"
+						+ ") values(board_seq.nextval, ?, ?, ?, ?)";
+		Object[] param = {
+			boardDto.getBoardTitle(), boardDto.getBoardWriter(),
+			boardDto.getBoardContent(), boardDto.getBoardHead()
+		};
+		jdbcTemplate.update(sql, param);
+	}
+	
+	@Override
+	public void clear() {
+		String sql = "delete board";
+		jdbcTemplate.update(sql);
+	}
+	
 	private RowMapper<BoardDto> mapper = new RowMapper<BoardDto>() {
-		
 		@Override
 		public BoardDto mapRow(ResultSet rs, int rowNum) throws SQLException {
-			BoardDto dto= new BoardDto();
-			dto.setBoardNo(rs.getInt("board_no"));
-			dto.setBoardWiter(rs.getString("board_writer"));
-			dto.setBoardTitle(rs.getString("board_title"));
-			dto.setBoardContent(rs.getString("board_content"));
-			dto.setBoardWriteTime(rs.getDate("board_writetime"));
-			dto.setBoardUpdateTime(rs.getDate("board_updatetime"));
-			dto.setBoardRead(rs.getInt("board_read"));
-			dto.setBoardLike(rs.getInt("board_like"));
-			dto.setBoardHead(rs.getString("board_head"));
-			return dto;
+			return BoardDto.builder()
+							.boardNo(rs.getInt("board_no"))
+							.boardTitle(rs.getString("board_title"))
+							.boardContent(rs.getString("board_content"))
+							.boardWriter(rs.getString("board_writer"))
+							.boardHead(rs.getString("board_head"))
+							.boardRead(rs.getInt("board_read"))
+							.boardLike(rs.getInt("board_like"))
+							.boardWritetime(rs.getDate("board_writetime"))
+							.boardUpdatetime(rs.getDate("board_updatetime"))
+						.build();
 		}
 	};
+
+	@Override
+	public List<BoardDto> selectList() {
+		String sql = "select * from board order by board_no desc";
+		return jdbcTemplate.query(sql, mapper);
+	}
+
+	@Override
+	public List<BoardDto> selectList(BoardListSearchVO vo) {
+		String sql = "select * from board "
+						+ "where instr(#1, ?) > 0 "
+						+ "order by board_no desc";
+		sql = sql.replace("#1", vo.getType());
+		Object[] param = {vo.getKeyword()};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+	
 	private ResultSetExtractor<BoardDto> extractor = new ResultSetExtractor<BoardDto>() {
 		@Override
 		public BoardDto extractData(ResultSet rs) throws SQLException, DataAccessException {
 			if(rs.next()) {
-				BoardDto dto= new BoardDto();
-				dto.setBoardNo(rs.getInt("board_no"));
-				dto.setBoardWiter(rs.getString("board_writer"));
-				dto.setBoardTitle(rs.getString("board_title"));
-				dto.setBoardContent(rs.getString("board_content"));
-				dto.setBoardWriteTime(rs.getDate("board_writetime"));
-				dto.setBoardUpdateTime(rs.getDate("board_updatetime"));
-				dto.setBoardRead(rs.getInt("board_read"));
-				dto.setBoardLike(rs.getInt("board_like"));
-				dto.setBoardHead(rs.getString("board_head"));
-				return dto;
+				return BoardDto.builder()
+						.boardNo(rs.getInt("board_no"))
+						.boardTitle(rs.getString("board_title"))
+						.boardContent(rs.getString("board_content"))
+						.boardWriter(rs.getString("board_writer"))
+						.boardHead(rs.getString("board_head"))
+						.boardRead(rs.getInt("board_read"))
+						.boardLike(rs.getInt("board_like"))
+						.boardWritetime(rs.getDate("board_writetime"))
+						.boardUpdatetime(rs.getDate("board_updatetime"))
+					.build();
 			}
 			else {
 				return null;
 			}
 		}
-		
 	};
-	@Override
-	public void write(BoardDto boardDto) {
-		String sql="insert into board(board_no, board_writer, "
-				+ "board_title, board_content, board_writetime, board_updatetime, board_read, "
-				+ "board_like, board_head) "
-				+ "values(board_seq.nextval,?,?,?,sysdate,null,0,0,?)";
-		Object[] param= {boardDto.getBoardWiter(),boardDto.getBoardTitle(),
-										boardDto.getBoardContent(),boardDto.getBoardHead()};
-		jdbcTemplate.update(sql,param);
-//		작성자 
-//		제목
-//		내용
-//		카테고리
-	}
 	
 	@Override
-	public List<BoardDto> selectList() {
-		String sql="select * from board order by board_no asc";
-		return jdbcTemplate.query(sql, mapper);
-	}
-
-	@Override
-	public List<BoardDto> selectList(String type, String keyword) {
-		String sql="select * from board "
-				+ "where instr("+type+", ?) > 0 "
-				+ "order by "+type+" asc";
-		Object[] param= {keyword};
-		return jdbcTemplate.query(sql, mapper, param);
-	}
-
-	@Override
 	public BoardDto selectOne(int boardNo) {
-		String sql="select * from board where board_no=?";
+		String sql = "select * from board where board_no = ?";
 		Object[] param = {boardNo};
 		return jdbcTemplate.query(sql, extractor, param);
 	}
-
+	
+	@Override
+	public boolean updateReadcount(int boardNo) {
+		String sql = "update board "
+						+ "set board_read = board_read + 1 "
+						+ "where board_no = ?";
+		Object[] param = {boardNo};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
+	
+	@Override
+	public BoardDto read(int boardNo) {
+		this.updateReadcount(boardNo);
+		return this.selectOne(boardNo);
+	}
+	
+	@Override
+	public int insert2(BoardDto boardDto) {
+		//번호를 미리 생성한 뒤 등록하는 기능
+		String sql = "select board_seq.nextval from dual";
+		int boardNo = jdbcTemplate.queryForObject(sql, int.class);
+		
+		sql = "insert into board("
+					+ "board_no, board_title, board_content,"
+					+ "board_writer, board_head"
+				+ ") values(?, ?, ?, ?, ?)";
+		Object[] param = {
+			boardNo, boardDto.getBoardTitle(),
+			boardDto.getBoardContent(), boardDto.getBoardWriter(),
+			boardDto.getBoardHead()
+		};
+		jdbcTemplate.update(sql, param);
+		
+		return boardNo;
+	}
+	
+	@Override
+	public boolean delete(int boardNo) {
+		String sql = "delete board where board_no = ?";
+		Object[] param = {boardNo};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
+	
+	@Override
+	public boolean update(BoardDto boardDto) {
+		String sql = "update board "
+						+ "set "
+							+ "board_title=?, "
+							+ "board_content=?, "
+							+ "board_head=?, "
+							+ "board_updatetime=sysdate "
+						+ "where board_no = ?";
+		Object[] param = {
+			boardDto.getBoardTitle(), boardDto.getBoardContent(),
+			boardDto.getBoardHead(), boardDto.getBoardNo()
+		};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
 }
+
+
+
+
+
+
+

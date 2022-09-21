@@ -29,7 +29,7 @@ public class BoardTest2 {
 				+ "board_writer, board_head) "
 				+ "values(?, ?, ?, ?, ?)";
 		Object[] param = {
-				boardNo, "테스트", "테스트", "hello1234", null
+				boardNo, "테스트", "테스트", "eclrain123", null
 		};
 		jdbcTemplate.update(sql, param);
 	}

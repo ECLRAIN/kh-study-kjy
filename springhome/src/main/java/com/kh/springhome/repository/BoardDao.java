@@ -9,8 +9,18 @@ public interface BoardDao {
 	void insert(BoardDto boardDto);
 	int insert2(BoardDto boardDto);
 	
-	List<BoardDto> selectList();
+	List<BoardDto> selectList(); //더이상 사용 x
+	//통합 검색 조회  메소드
 	List<BoardDto> selectList(BoardListSearchVO vo);
+	List<BoardDto>list(BoardListSearchVO vo);
+	List<BoardDto> search(BoardListSearchVO vo);
+	
+	//검색과 목록의 총 데이터 개수를 구하는 메소드 (마지막 페이지)
+	int count(BoardListSearchVO vo);
+	int searchCount(BoardListSearchVO vo);
+	int listCount(BoardListSearchVO vo);
+	
+	
 	BoardDto selectOne(int boardNo);
 	BoardDto read(int boardNo);//조회수 증가까지
 	

@@ -26,7 +26,7 @@ public class MemberBoardPermissionCheckInterceptor implements HandlerInterceptor
 				if(!request.getMethod().equals("POST")) {
 					return true;
 				}
-
+				
 				//1
 				HttpSession session = request.getSession();
 				//String memberGrade = (String)session.getAttribute("mg");
@@ -34,19 +34,20 @@ public class MemberBoardPermissionCheckInterceptor implements HandlerInterceptor
 				if(memberGrade.equals("관리자")) {
 					return true;
 				}
-
+				
 				//2
 				String boardHead = request.getParameter("boardHead");
 				if(boardHead != null && !boardHead.equals("공지")) {
 					return true;
 				}
-
+				
 				//나머지는 다 차단
 				response.sendError(403);
 				//response.sendError(HttpServletResponse.SC_FORBIDDEN);
 				return false;
 			}
 		}
+
 
 
 

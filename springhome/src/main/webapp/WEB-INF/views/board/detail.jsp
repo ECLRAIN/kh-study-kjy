@@ -57,8 +57,9 @@
 		<tr>
 			<td colspan="2" align="right">
 				
-				<c:if test="${loginId != null}">
+				<c:if test="${loginId != null}"> <!-- 회원만 글쓰기 답글쓰기 기능을 -->
 				<a href="write">글쓰기</a>
+				<a href="write?boardParent=${boardDto.boardNo}">답글쓰기</a> 
 				</c:if>
 				
 				<%--

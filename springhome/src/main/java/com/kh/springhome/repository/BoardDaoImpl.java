@@ -52,6 +52,9 @@ public class BoardDaoImpl implements BoardDao {
 							.boardLike(rs.getInt("board_like"))
 							.boardWritetime(rs.getDate("board_writetime"))
 							.boardUpdatetime(rs.getDate("board_updatetime"))
+							.boardGroup(rs.getInt("board_group"))
+							.boardParent(rs.getInt("board_parent"))
+							.boardDepth(rs.getInt("board_depth"))
 						.build();
 		}
 	};
@@ -86,6 +89,9 @@ public class BoardDaoImpl implements BoardDao {
 						.boardLike(rs.getInt("board_like"))
 						.boardWritetime(rs.getDate("board_writetime"))
 						.boardUpdatetime(rs.getDate("board_updatetime"))
+						.boardGroup(rs.getInt("board_group"))
+						.boardParent(rs.getInt("board_parent"))
+						.boardDepth(rs.getInt("board_depth"))
 					.build();
 			}
 			else {
@@ -117,23 +123,26 @@ public class BoardDaoImpl implements BoardDao {
 	}
 	
 	@Override
-	public int insert2(BoardDto boardDto) {
-		//번호를 미리 생성한 뒤 등록하는 기능
+	public int sequence() {
 		String sql = "select board_seq.nextval from dual";
 		int boardNo = jdbcTemplate.queryForObject(sql, int.class);
-		
-		sql = "insert into board("
+		return boardNo;
+	}
+	
+	@Override
+	public void insert2(BoardDto boardDto) {
+		String sql = "insert into board("
 					+ "board_no, board_title, board_content,"
-					+ "board_writer, board_head"
-				+ ") values(?, ?, ?, ?, ?)";
+					+ "board_writer, board_head, "
+					+ "board_group, board_parent, board_depth"
+				+ ") values(?, ?, ?, ?, ?, ?, ?, ?)";
 		Object[] param = {
-			boardNo, boardDto.getBoardTitle(),
+			boardDto.getBoardNo(), boardDto.getBoardTitle(),
 			boardDto.getBoardContent(), boardDto.getBoardWriter(),
-			boardDto.getBoardHead()
+			boardDto.getBoardHead(), boardDto.getBoardGroup(),
+			boardDto.getBoardParentInteger(), boardDto.getBoardDepth()
 		};
 		jdbcTemplate.update(sql, param);
-		
-		return boardNo;
 	}
 	
 	@Override
@@ -165,7 +174,9 @@ public class BoardDaoImpl implements BoardDao {
 							+ "select rownum rn, TMP.* from ("
 								+ "select * from board "
 								+ "where instr(#1, ?) > 0 "
-								+ "order by board_no desc"
+								+ "connect by prior board_no=board_parent "
+								+ "start with board_parent is null "
+								+ "order siblings by board_group desc, board_no asc "
 							+ ")TMP"
 						+ ") where rn between ? and ?";
 		sql = sql.replace("#1", vo.getType());
@@ -179,7 +190,10 @@ public class BoardDaoImpl implements BoardDao {
 	public List<BoardDto> list(BoardListSearchVO vo) {
 		String sql = "select * from ("
 							+ "select rownum rn, TMP.* from ("
-								+ "select * from board order by board_no desc"
+								+ "select * from board "
+								+ "connect by prior board_no=board_parent "
+								+ "start with board_parent is null "
+								+ "order siblings by board_group desc, board_no asc "
 							+ ")TMP"
 						+ ") where rn between ? and ?";
 		Object[] param = {vo.startRow(), vo.endRow()};

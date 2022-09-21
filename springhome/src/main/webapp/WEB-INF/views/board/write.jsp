@@ -6,11 +6,23 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="자유 게시판" name="title"/>
 </jsp:include>
+<c:set var="isReply" value="${param.boardParent !==null}"></c:set>
+<c:choose>
 
+<c:when test="${isReply}">
 <h1>게시글 작성</h1>
+</c:when>
 
+<c:otherwise>
+<h1>답글 작성</h1>
+</c:otherwise>
+
+</c:choose>
 <form action="write" method="post">
 <table border="1" width="500">
+<c:if test="${isReply}">
+<input type ="hidden" name="boardParent" value="${param.boardParam}"
+</c:if>
 	<tbody>
 		<tr>
 			<th>말머리</th>

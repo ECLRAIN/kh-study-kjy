@@ -10,7 +10,7 @@
 </c:set>
 
 <!-- 테스트용 데이터 출력 -->
- <h3>${vo}</h3>
+<%-- <h3>${vo}</h3> --%>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="자유 게시판" name="title"/>
@@ -34,7 +34,7 @@
 			<th>작성일</th>
 			<th>조회수</th>
 			<th>그룹</th>
-			<th>부모글</th>
+			<th>부모</th>
 			<th>차수</th>
 		</tr>
 	</thead>
@@ -43,9 +43,11 @@
 		<tr>
 			<td>${boardDto.boardNo}</td>
 			<td align="left">
-			<c:forEach var="i" begin="1" end="${boardDto.boardDepth}" step="1">
-				&nbsp;&nbsp;
+				<!-- 차수만큼 띄어쓰기를 반복 -->
+				<c:forEach var="i" begin="1" end="${boardDto.boardDepth}" step="1">
+					&nbsp;&nbsp;
 				</c:forEach>
+				
 				<!-- 말머리 출력(있을 경우에만) -->
 				<c:if test="${boardDto.boardHead != null}">
 					[${boardDto.boardHead}]

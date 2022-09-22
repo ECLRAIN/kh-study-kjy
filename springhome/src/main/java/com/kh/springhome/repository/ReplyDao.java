@@ -10,4 +10,10 @@ public interface ReplyDao {
 	ReplyDto selectOne(int replyNo);
 	boolean update(ReplyDto replyDto);
 	boolean delete(int replyNo);
+	boolean updateBlind(int replyNo, boolean blind);
 }
+
+
+
+
+

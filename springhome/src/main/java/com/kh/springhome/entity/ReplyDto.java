@@ -14,4 +14,5 @@ public class ReplyDto {
 	private Date replyWritetime;
 	private String replyWriter;
 	private int replyOrigin;
+	private boolean replyBlind;
 }

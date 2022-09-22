@@ -123,7 +123,17 @@
 				
 				(등급) 
 				<br>
-				<pre>${replyDto.replyContent}</pre>
+				
+				<!-- 블라인드 여부에 따라 다르게 표시 -->
+				<c:choose>
+					<c:when test="${replyDto.replyBlind}">
+						<pre>블라인드 처리된 게시물입니다</pre>
+					</c:when>
+					<c:otherwise>
+						<pre>${replyDto.replyContent}</pre>
+					</c:otherwise>
+				</c:choose>
+				
 				<br><br>
 				<fmt:formatDate value="${replyDto.replyWritetime}" 
 											pattern="yyyy-MM-dd HH:mm"/>
@@ -137,7 +147,16 @@
 				</c:if>
 				
 				<c:if test="${admin}">
-					<a href="#">블라인드</a>
+					<!-- 블라인드 여부에 따라 다르게 표시 -->
+					<c:choose>
+						<c:when test="${replyDto.replyBlind}">
+							<a href="#">블라인드<br>해제</a>
+						</c:when>
+						<c:otherwise>
+							<a href="#">블라인드<br>설정</a>
+						</c:otherwise>
+					</c:choose>
+					
 				</c:if>
 			</th>
 		</tr>

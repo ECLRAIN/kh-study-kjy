@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.springhome.entity.ReplyDto;
+import com.kh.springhome.vo.ReplyListVO;
 
 @Repository
 public class ReplyDaoImpl implements ReplyDao{
@@ -32,6 +33,22 @@ public class ReplyDaoImpl implements ReplyDao{
 						.build();
 		}
 	};
+	
+	private RowMapper<ReplyListVO> listMapper = new RowMapper<ReplyListVO>() {
+		@Override
+		public ReplyListVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+			return ReplyListVO.builder()
+							.replyNo(rs.getInt("reply_no"))
+							.replyWriter(rs.getString("reply_writer"))
+							.replyContent(rs.getString("reply_content"))
+							.replyOrigin(rs.getInt("reply_origin"))
+							.replyWritetime(rs.getDate("reply_writetime"))
+							.replyBlind(rs.getString("reply_blind") != null)
+							.memberNick(rs.getString("member_nick"))
+							.memberGrade(rs.getString("member_grade"))
+						.build();
+		}
+	};
 
 	@Override
 	public void insert(ReplyDto replyDto) {
@@ -48,12 +65,14 @@ public class ReplyDaoImpl implements ReplyDao{
 	}
 
 	@Override
-	public List<ReplyDto> selectList(int replyOrigin) {
-		String sql = "select * from reply "
+	public List<ReplyListVO> selectList(int replyOrigin) {
+		String sql = "select R.*, M.member_nick, M.member_grade "
+						+ "from reply R left outer join member M "
+							+ "on R.reply_writer = M.member_id "
 						+ "where reply_origin = ? "
 						+ "order by reply_no asc";
 		Object[] param = {replyOrigin};
-		return jdbcTemplate.query(sql, mapper, param);
+		return jdbcTemplate.query(sql, listMapper, param);
 	}
 
 	@Override

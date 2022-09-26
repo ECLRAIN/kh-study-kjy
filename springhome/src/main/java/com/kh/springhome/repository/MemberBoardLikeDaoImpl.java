@@ -37,6 +37,23 @@ public class MemberBoardLikeDaoImpl implements MemberBoardLikeDao {
 		return count == 1;//좋아요 상태면 1 아니면 0
 	}
 
+	@Override
+	public int count(int boardNo) {
+		String sql = "select count(*) from member_board_like "
+								+ "where board_no = ?";
+		Object[] param = {boardNo};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
+	
+	@Override
+	public void refresh(int boardNo) {
+		String sql = "update board set board_like = ("
+							+ "select count(*) from member_board_like "
+							+ "where board_no = ?"
+						+ ") where board_no = ?";
+		Object[] param = {boardNo, boardNo};
+		jdbcTemplate.update(sql, param);
+	}
 }
 
 

@@ -30,6 +30,7 @@ public interface BoardDao {
 	
 	void clear();
 	boolean delete(int boardNo);
+	void connectAttachment(int boardNo, int attachmentNo);
 }
 
 

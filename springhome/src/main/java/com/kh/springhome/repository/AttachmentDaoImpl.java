@@ -91,6 +91,8 @@ public class AttachmentDaoImpl implements AttachmentDao{
 		Object[] param = {attachmentNo};
 		return jdbcTemplate.update(sql, param) > 0;
 	}
+
+	
 }
 
 

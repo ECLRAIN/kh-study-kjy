@@ -224,6 +224,14 @@ public class BoardDaoImpl implements BoardDao {
 		Object[] param = {vo.getKeyword()};
 		return jdbcTemplate.queryForObject(sql, int.class, param);
 	}
+	@Override
+	public void connectAttachment(int boardNo, int attachmentNo) {
+		String sql = "insert into board_attachment("
+							+ "board_no, attachment_no"
+						+ ") values(?, ?)";
+		Object[] param = {boardNo, attachmentNo};
+		jdbcTemplate.update(sql, param);
+	}
 }
 
 

@@ -104,6 +104,7 @@
 						(${attachmentDto.attachmentSize} bytes) 
 						- 
 						[${attachmentDto.attachmentType}]
+						<a href="/attachment/download/${attachmentDto.attachmentNo}">↓</a>
 					</li>
 					</c:forEach>
 				</ul>

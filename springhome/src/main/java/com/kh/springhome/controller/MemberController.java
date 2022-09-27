@@ -1,8 +1,14 @@
 package com.kh.springhome.controller;
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,10 +16,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.springhome.constant.SessionConstant;
 import com.kh.springhome.entity.MemberDto;
+import com.kh.springhome.error.TargetNotFoundException;
 import com.kh.springhome.repository.MemberDao;
 
 @Controller
@@ -28,11 +37,21 @@ public class MemberController {
 //		return "/WEB-INF/views/member/join.jsp";
 		return "member/join";
 	}
-	
+	//(추가) 첨부파일을 받아서 저장
 	@PostMapping("/join")
-	public String join(@ModelAttribute MemberDto memberDto) {
+	public String join(@ModelAttribute MemberDto memberDto, 
+			@RequestParam MultipartFile memberProfile) throws IllegalStateException, IOException {
+//		데이터베이스 저장
 		memberDao.insert(memberDto);
-		return "redirect:join_finish";
+		
+		if(!memberProfile.isEmpty()) { //첨부파일이 있다면
+		//프로필 저장
+		File directory = new File("D:/upload/member");
+		directory.mkdirs();
+		File target= new File(directory, memberDto.getMemberId());
+		memberProfile.transferTo(target);
+		}
+		return "redirect:join_finish"; //
 	}
 	
 	@GetMapping("/join_finish")
@@ -286,7 +305,35 @@ public class MemberController {
 //		return "/WEB-INF/views/member/goodbyeResult.jsp";
 		return "member/goodbyeResult";
 	}
-	
+	//특정 사용자의 프로필 이미지를 다운로드하는 매핑
+//		전송을 하려면화면을 무시하는 설정을 해야함(@ResponseBody)
+//		전송을 부탁하려면 ResponseEntity 형태가 반환되어야 한다
+	@GetMapping("/download")
+	@ResponseBody
+	public ResponseEntity<ByteArrayResource> download(@RequestParam String memberId) throws IOException {
+		//파일 찾기
+		File directory =new File("D:/upload/member");
+		File target = new File(directory, memberId);
+		//파일이 존재하는지
+		if(target.exists()) {//해당 파일의 내용을 불러온다 의존성 필요 apache commons io
+			byte[] data = FileUtils.readFileToByteArray(target);
+			ByteArrayResource resource = new ByteArrayResource(data);
+			
+			//사용자에게 보낼 응답 생성
+			//header에는 보낼 파일의 정보를, body에는 보낼 파일의 내용을 첨부
+			return ResponseEntity.ok() //브라우저에게 사용법을 알려주기 위한 
+													.header("Content-Encoding", "UTF-8")  //해석
+													.header("Content-Length", String.valueOf(data.length)) //퍼센트
+													.header("Content-Dispostion", "attachment; filename="+memberId) // 이 파일에 직접 접속해서 다운로드 해라
+													.header("Content-type", "application/octet-stream")
+													.body(resource);
+		}
+		else {//파일이 없다면
+			//개발자가 지정한 예외를 발생시키는 방법
+			throw new TargetNotFoundException("프로필없음");
+			//return ResponseEntity.notFound().build();
+		}
+	}
 }
 
 

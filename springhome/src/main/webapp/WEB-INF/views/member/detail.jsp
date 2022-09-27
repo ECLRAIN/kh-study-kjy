@@ -22,6 +22,12 @@
 	<h1>${memberDto.memberId} 회원 정보</h1>
 	<table border="1" width="400">
 		<tbody>
+			<!-- 프로필 이미지를 출력 -->
+			<tr>
+				<th colspan="2">
+					<img src="download?memberId=${memberDto.memberId}" width="100" height="100">
+				</th>
+			</tr>
 			<tr>
 				<th width="25%">아이디</th>
 				<td>${memberDto.memberId}</td>
@@ -94,6 +100,78 @@
 		</c:otherwise>
 	</c:choose>
 	
+	<!-- 내가 작성한 게시글 -->
+	<h1>내가 작성한 게시글</h1>
+	
+	<c:choose>
+		<c:when test="${writeBoardList.isEmpty()}">
+			작성한 게시글이 없습니다
+		</c:when>
+		<c:otherwise>
+			<table border="1" width="600">
+				<thead>
+					<tr>
+						<th width="60%">제목</th>
+						<th>작성일</th>
+						<th>조회수</th>
+					</tr>
+				</thead>
+				<tbody align="center">
+					<c:forEach var="boardDto" items="${writeBoardList}">
+					<tr>
+						<td align="left">
+							<c:if test="${boardDto.boardHead}">
+								[${boardDto.boardHead}]
+							</c:if>
+							<a href="/board/detail?boardNo=${boardDto.boardNo}">
+								${boardDto.boardTitle}
+							</a>
+						</td>
+						<td>${boardDto.boardWritetime}</td>
+						<td>${boardDto.boardRead}</td>
+					</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</c:otherwise>
+	</c:choose>		
+	
+	<!-- 좋아요를 누른 게시글 -->
+	<h1>좋아요를 누른 게시글</h1>
+	
+	<c:choose>
+		<c:when test="${likeBoardList.isEmpty()}">
+			좋아요를 누른 게시글이 없습니다
+		</c:when>
+		<c:otherwise>
+			<table border="1" width="600">
+				<thead>
+					<tr>
+						<th width="60%">제목</th>
+						<th>작성자</th>
+						<th>작성일</th>
+					</tr>
+				</thead>
+				<tbody align="center">
+					<c:forEach var="boardDto" items="${likeBoardList}">
+					<tr>
+						<td align="left">
+							<c:if test="${boardDto.boardHead}">
+								[${boardDto.boardHead}]
+							</c:if>
+							<a href="/board/detail?boardNo=${boardDto.boardNo}">
+								${boardDto.boardTitle}
+							</a>
+						</td>
+						<td>${boardDto.boardWriter}</td>
+						<td>${boardDto.boardWritetime}</td>
+					</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</c:otherwise>
+	</c:choose>
+	
 </div>
 
 <c:choose>
@@ -104,5 +182,4 @@
 		<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 	</c:otherwise>
 </c:choose>
-
 

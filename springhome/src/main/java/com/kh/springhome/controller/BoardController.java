@@ -49,12 +49,11 @@ public class BoardController {
 	private AttachmentDao attachmentDao;
 	
 	private final File directory = new File("D:/upload");
-	
-	@PostConstruct//최초 실행시 딱 한번만 실행되는 메소드
+
+	@PostConstruct//최초 실행시 딱 한 번만 실행되는 메소드
 	public void prepare() {
 		directory.mkdirs();
 	}
-	
 	
 //	참고 : ModelAttribute로 수신한 데이터는 자동으로 Model에 첨부된다
 //	- 옵션에 name을 작성하면 해당하는 이름으로 model에 첨부
@@ -117,6 +116,10 @@ public class BoardController {
 			model.addAttribute("isLike", likeDao.check(likeDto));
 		}
 		
+//		(+추가) 게시글에 대한 첨부파일을 조회하여 첨부
+		model.addAttribute("attachmentList", 
+				attachmentDao.selectBoardAttachmentList(boardNo));
+		
 		return "board/detail";
 	}
 	
@@ -145,7 +148,7 @@ public class BoardController {
 			boardDto.setBoardParent(0);
 			boardDto.setBoardDepth(0);
 		}
-		else {//답글이라면
+		else {//답글이라면 
 			BoardDto parentDto = boardDao.selectOne(
 													boardDto.getBoardParent());
 			boardDto.setBoardGroup(parentDto.getBoardGroup());
@@ -165,16 +168,19 @@ public class BoardController {
 				//DB 등록
 				int attachmentNo = attachmentDao.sequence();
 				attachmentDao.insert(AttachmentDto.builder()
-						.attachmentNo(attachmentNo)
-						.attachmentName(file.getOriginalFilename())
-						.attachmentSize(file.getSize())
+							.attachmentNo(attachmentNo)
+							.attachmentName(file.getOriginalFilename())
+							.attachmentType(file.getContentType())
+							.attachmentSize(file.getSize())
 						.build());
+				
 				//파일 저장
 				File target = new File(directory, String.valueOf(attachmentNo));
+				System.out.println(target.getAbsolutePath());
 				file.transferTo(target);
+				
 				//+ 연결 테이블에 연결 정보를 저장(게시글번호, 첨부파일번호)
 				boardDao.connectAttachment(boardNo, attachmentNo);
-				
 			}
 		}
 		

@@ -43,7 +43,24 @@
 		</tr>
 		<tr>
 			<th>제목</th>
-			<td>${boardDto.boardTitle}</td>
+			<td>
+				${boardDto.boardTitle}
+				
+				<!-- 좋아요 하트 -->
+				<c:if test="${isLike == null}">
+					♥
+				</c:if>
+				<c:if test="${isLike == true}">
+					<a href="like?boardNo=${boardDto.boardNo}">♥</a>
+				</c:if>
+				<c:if test="${isLike == false}">
+					<a href="like?boardNo=${boardDto.boardNo}">♡</a>
+				</c:if>
+				
+				<!-- 좋아요 개수 -->
+				${likeCount}, ${boardDto.boardLike}		
+
+			</td>
 		</tr>
 		<tr>
 			<th>작성자</th>
@@ -66,11 +83,30 @@
 				<fmt:formatDate value="${boardDto.boardWritetime}" pattern="y년 M월 d일 E요일 a h시 m분 s초"/>
 			</td>
 		</tr>
+
 		<c:if test="${boardDto.boardUpdatetime != null}">
 		<tr>
 			<th>수정일</th>
 			<td>
 				<fmt:formatDate value="${boardDto.boardUpdatetime}" pattern="y년 M월 d일 E요일 a h시 m분 s초"/>
+			</td>
+		</tr>
+		</c:if>
+		
+		<c:if test="${attachmentList != null}">
+		<tr>
+			<th>첨부파일</th>
+			<td>
+				<ul>
+					<c:forEach var="attachmentDto" items="${attachmentList}">
+					<li>
+						${attachmentDto.attachmentName} 
+						(${attachmentDto.attachmentSize} bytes) 
+						- 
+						[${attachmentDto.attachmentType}]
+					</li>
+					</c:forEach>
+				</ul>
 			</td>
 		</tr>
 		</c:if>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 화면 퀴즈</title>
+
+    <style>
+        *{
+            box-sizing: border-box;
+            font-family: 궁서;
+        }
+        div{
+            border:1px dotted gray;
+        }
+        input[name=Login]{
+
+        }
+        .user-input{
+            box-sizing: border-box;
+            width: 200px;
+            margin:10px 0px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: white;
+            border-color: black;
+            border-width: 4px;
+        }
+        
+        .BUTTON{
+            box-sizing: border-box;
+            width:220px;
+            margin: 10px 0px;
+            padding:10px;
+            background-color: black;
+            color: white;
+            border:2px solid black;
+            font-family: sans-serif;
+            font-size: 15px;
+            display: block;
+        }
+    </style>
+
+</head>
+<body>
+    <div align="center">
+        <h1>Login</h1>
+        <form action="login" method="post">
+    
+    <input type="text" name="ID" class="user-input" placeholder="ID">
+    
+    <input type="PASSWORD" name="PW" class="user-input" placeholder="PW">
+    
+    <input type="text" name="ID" class="user-input" placeholder="NICKNAME">
+    <button type="submit" class="BUTTON">로그인</button>
+        </form>
+    </div>
+    display 속성: 배치되는 방식을 결졍
+    <br>
+    inline: 오른쪽으로 이동하여 배치 (폭 지정 불가)
+    <br>
+    block: 아래로 이동하여 배치 (폭 지정 가능)
+    <br>
+    inline-block: 오른쪽으로 이동하여 배치(폭 지정 가능)
+    <br>
+    none: 숨김
+    <BR>
+    margin top bottom은 서로 상쇄된다
+    보이는 태그뿐 아니라 자리를 배분하기 위한 영역 설정
+    DIV를 적극적으로 사용
+
+</body>
+</html>

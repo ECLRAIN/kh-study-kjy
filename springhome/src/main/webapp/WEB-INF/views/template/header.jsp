@@ -16,6 +16,7 @@
 				</c:otherwise>
 			</c:choose>
 		</title>
+		<link rel="stylesheet" type="text/css" href="commons.css">
 	</head>
 	<body>
 		<!-- 메뉴 : 반드시 절대 경로로 작성 -->

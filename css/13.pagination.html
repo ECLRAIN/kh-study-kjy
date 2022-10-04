@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>페이징</title>
+    <link rel="stylesheet" type="text/css" href="commons.css">
+    <style>
+        ul.page{
+            list-style: none;
+            padding: 0;
+            margin: 5;
+            font-size: 16px; 
+            text-align: center; /*전체 양식을*/
+        }
+        ul.page>li{
+            display: inline-block;
+            padding: 0.5em;
+            border: 1px solid red;
+            line-height: 1em; /*글자 표시 높이 설정*/
+            min-width: 2em;
+            text-align: left; /*li칸마다 */
+            cursor: pointer;
+        }
+        ul.page>li.on,
+        ul.page>li:hover{
+            border-color: blue;
+            color: chocolate;
+        }
+        ul.page.page-big{
+
+        }
+        /*확장 스타일 글자 크기를 다르게 하여 다양한 크기 옵션을 */
+        
+    </style>
+</head>
+<body>
+    <div class="container-800 mt-40">
+        <div class="row center">
+            <h1>페이지네비</h1>
+        </div>
+        <div class="row">
+            <!--ul ol과 같은 리스트 태그
+            장점 구조상 어쩔 수 없이 하나로 묶인다
+            계층셩 구조를 만들 때 좋다
+            단점 디자인을 많이 바꿔야 한다
+            -->
+            <ul class="page on">
+                <li><a href="#">1</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">1</a></li>
+
+
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

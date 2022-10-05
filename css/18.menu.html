@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" type="text/css" href="commons.css">
+    <style>
+        /*드롭 다운 메뉴 만들기
+        -html 구조는 ul로 구현한다
+
+        1차 메뉴와 2차 메뉴, 모든 메뉴에 대한 선택자가 다르다
+        1차 메뉴 dropdown-menu
+        */
+        .dropdown-menu,.dropdown-menu ul{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        /*3*/
+        .dropdown-menu > li{
+            display: inline-block;
+            width: 110px;
+        }
+        /*4*/
+        .dropdown-menu{
+            background-color: brown;
+        }
+    </style>
+
+</head>
+<body>
+    <ul class="dropdown-menu">
+
+        <li> 
+            <a href="#"> 메뉴1 </a> 
+            <ul>
+                <li><a href="#">항목</a></li>
+                <li><a href="#">항목</a></li>
+                <li><a href="#">항목</a></li>
+                <li><a href="#">항목</a></li>
+
+            </ul>
+        </li>
+
+        <li> 
+            <a href="#"> 메뉴2 </a> 
+            <ul>
+                <li><a href="#">항목</a></li>
+                <li><a href="#">항목</a></li>
+                <li><a href="#">항목</a></li>
+                <li><a href="#">항목</a></li>
+
+            </ul>
+        </li>
+
+        <li> 
+            <a href="#"> 메뉴3 </a> 
+            <ul>
+                <li><a href="#">항목</a></li>
+                <li><a href="#">항목</a></li>
+                <li><a href="#">항목</a></li>
+                <li><a href="#">항목</a></li>
+
+            </ul>
+        </li>
+
+        <li> 
+            <a href="#"> 메뉴4 </a> 
+            <ul>
+                <li><a href="#">항목</a></li>
+                <li><a href="#">항목</a></li>
+                <li><a href="#">항목</a></li>
+                <li><a href="#">항목</a></li>
+
+            </ul>
+        </li>
+        
+
+    </ul>
+</body>
+</html>

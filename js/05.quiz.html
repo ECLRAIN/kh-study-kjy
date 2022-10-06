@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="text/javascript">
+        //자바스크립트 코드
+        function small(){
+            var target = document.querySelector(".text-viewer");
+            //target.style = "font-size:12px;";
+            //target.style["font-size"] = "12px";//참고만
+            target.style.fontSize = "12px";
+        }
+        function normal(){
+            var target = document.querySelector(".text-viewer");
+            //target.style = "font-size:16px;";
+            target.style.fontSize = "16px";
+        }
+        function big(){
+            var target = document.querySelector(".text-viewer");
+            //target.style = "font-size:20px;";
+            target.style.fontSize = "20px";
+        }
+    </script>
+
+</head>
+<body>
+
+    <!-- HTML 화면 -->
+    <button onclick="small();">작게</button>
+    <button onclick="normal();">보통</button>
+    <button onclick="big();">크게</button>
+    <hr>
+    <p class="text-viewer">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu condimentum ipsum. Morbi tristique magna sit amet dui ultricies tristique. In quis nulla faucibus magna gravida mollis sit amet ac tortor. Aenean quam sapien, pretium at odio et, aliquam molestie arcu. Etiam eget risus et neque vehicula vehicula ut id libero. Aenean hendrerit quis felis eget egestas. In sed nunc convallis, pellentesque sem eget, feugiat purus. Suspendisse molestie nisl vitae lorem auctor iaculis.</p>
+    
+</body>
+</html>

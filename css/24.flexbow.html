@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
+
+
+    <link rel="stylesheet" type="text/css" href="reset.css">
+    <link rel="stylesheet" type="text/css" href="commons.css">
+    <link rel="stylesheet" type="text/css" href="layout.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" type="text/css" href="test.css">
+    
+    <style>
+        /*flex박스
+        1.flex 설정은 개별 항목이 아닌 영역에 한다
+        2.배치 방향을 flex-derection속성으로 저장할 수 있다
+        3.폭을 지정하지 않으면 자동으로 비율로 할당되도록 구현할 수 있다
+        (개별 설정)flex-grow
+        4.줄바꿈 허용/불가를 flex-wrap 속성으로 설정할 수 있다
+        5.정렬 기준을 손쉽게 설정할 수 있다
+        justify-content로 내부 항목의 배치형식을 설정할 수 있다
+        align-items로 내부 항목의 세로 배치 형식을 설정할 수 있다
+        플렉스가 없을 때 
+        */
+     .first{
+        display: flex;
+        flex-direction: row;
+     }   
+     .first>div{
+        flex-grow: 1;
+     }
+     .second{
+        display: flex;
+        flex-wrap: nowrap;
+     }
+     .third{
+        display: flex;
+        height: 200px;
+        justify-content: center;
+        align-items: center;
+     }
+    </style>
+</head>
+<body>
+    <div class="container-600">
+        <div class="row mt-40">
+            <h1>flexbox layout</h1>
+        </div>
+        <!--flex는 영역에다가 설정하는거임 위는 위 아래는 아래-->
+        <div class="row first">
+            <div>1단</div>
+            <div>2단</div>
+            <div>3단</div>
+            <div>4단</div>
+        </div>
+
+        <div class="row mt-40">
+            <h1>줄바꿈 설정</h1>
+        </div>
+        <!--flex는 영역에다가 설정하는거임 위는 위 아래는 아래-->
+        <div class="row second">
+            <div class="w-50" style="order:2;">1단</div>
+            <div class="w-50" style="order:1;">2단</div>
+            <div class="w-50" style="order:3;">3단</div>
+            <div class="w-50" style="order:4;">4단</div>
+        </div>
+
+        <div class="row mt-40">
+            <h1>가운데 배치</h1>
+        </div>
+        <div class="row third">
+            <div class="screen">
+                샘플화면
+            </div>
+        </div>
+    </div>
+</body>
+</html>

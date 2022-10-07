@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>homework</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+    <link rel="stylesheet" type="text/css" href="./reset.css">
+
+    <style>
+
+    </style>
+
+    <script type="text/javascript">
+        //자바스크립트 코드
+        function idCheck(){
+            var re = document.querySelector("input[name=ID]");
+            var idTest = re.value;
+            
+            console.log(re);
+            console.log(idTest);
+
+
+            var span=document.querySelector(".id-result");
+            
+            
+            if(!idTest){ 
+                //미입력이라면
+                span.textcontent= "";
+            }
+            else{
+                var regexId=/^[a-z][a-z0-9]{7,19}$/;
+                // 입력상태라면
+                if(regexId.test(idTest)){
+                    //입력했는데 통과라면?
+                    span.textContent="잘했어요"; //미리 입력한 스팬태그에 텍스트값을 보여주자 
+                    span.style.color="green"; //잘했 을 초록으로 칠해
+                }
+                else{
+                    // 입력했는데 미달이면?
+                    span.textContent = "영어소문자, 숫자를 넣어 8~20자를 충족해야 합니다.";
+                    span.style.color = "red";
+                }
+            }
+        }
+        function pwCheck(){
+           var ra = document.querySelector("input[name=PW]");
+           var re = document.querySelector("input[name=PWC]");
+           var pwTest = ra.value;
+           var pwcTest = re.value;
+           console.log(ra);
+            console.log(pwTest);
+
+            
+            var BTN=document.querySelector(".what");
+           var span1=document.querySelector(".pw-result");
+           var span2=document.querySelector(".pwc-result");
+           if(!pwTest){
+               span1.textContent= "";
+            }
+            else{
+               var regexPw=/^[A-Za-z0-9!@#$]{8,16}$/;
+            if(regexPw.test(pwTest)){
+                span1.textContent="잘했어요";
+                span1.style.color="green";
+            }
+            else{
+                span1.textContent="비밀번호가 일치하지 않습니다";
+                span1.style.color="red";
+            }
+           }
+           
+           if(!pwcTest){
+            span2.textContent= "";
+           }
+           else{
+            if(pwTest==pwcTest){
+                span2.textContent="일치해요";
+                span2.style.color="green";
+                BTN.disabled=false;
+                
+            }
+            else{
+                span2.textContent="불일치해요";
+                span2.style.color="red";
+                BTN.disabled=true;
+            }
+           }
+           
+        }
+
+    </script>
+
+</head>
+<body>
+
+    <!-- HTML 화면 -->
+    <div class="container-500">
+
+        <div class="row center">
+            <h1>회원가입</h1>
+        </div>
+        <form action="?" method="post" autocomplete="off">
+
+            <div class="row">
+                아이디
+            </div>
+            <input type="text" name="ID" class="input" onblur="idCheck();">
+            
+            <div class="row">
+                <span class="id-result"></span>
+            </div>
+            
+            <div class="row mt-40">
+                비밀번호
+            </div>
+            <input type="text" name="PW" class="input" onblur="pwCheck();">
+            
+            <div class="row">
+                <span class="pw-result"></span>
+            </div>
+            
+            <div class="row mt-40">
+                비밀번호 확인
+            </div>
+            <input type="password" name="PWC" class="input" onblur="pwCheck();">
+            
+            <div class="row">
+                <span class="pwc-result"></span>
+            </div>
+            
+            <button class="what btn btn-positive" disabled>가입</button>
+        </form>
+            
+    </div>
+        
+    </body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="commons.css">
+
+    <style>
+        /* div{
+            border: 1px dotted darkviolet;
+        } */
+    </style>
+
+
+    <script type="text/javascript">
+        //자바스크립트 코드
+        function checkText(){
+            //입력된 글자수를 구해야 한다
+            //textarea도 value
+            var what=document.querySelector(".test-textarea");
+            console.log(what); 
+            var memo=what.value;
+            console.log(memo);
+
+            // 글자수에 따라 다른 표시를 구현해야 한다
+           var q1=document.querySelector(".count");
+          q1.textContent=memo.length;
+          if(memo.length==1000){
+            q1.style.color="red";
+          }
+          else{
+            q1.style.color="blue";
+          }
+
+          //글자수 초과시 삭제
+          var max=memo.length;
+          
+          while(max>1000){
+            what.value=what.value.substring(0,max-1);
+            max--;
+          }
+          q1.textContent=max;
+         }
+   
+
+    
+    </script>
+
+</head>
+<body>
+
+    <!-- HTML 화면 -->
+    <div class="container-600 mt-50">
+        <div class="row left">
+            <h1>Q. 우리 회사에 지원한 동기를 작성하세요</h1>
+        </div>
+        <div class="row">
+            <textarea class="test-textarea w-100" rows="10" oninput="checkText();"></textarea>
+        </div>
+        <div class="right"> 
+            <span class="count">0</span> / 1000
+        </div>
+    </div>
+    <h1></h1>
+</body>
+</html>

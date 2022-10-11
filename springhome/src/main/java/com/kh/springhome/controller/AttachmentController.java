@@ -24,7 +24,7 @@ public class AttachmentController {
 			@PathVariable int attachmentNo) throws IOException{
 		return attachmentService.load(attachmentNo);
 	}
-	
+	//테스트
 }
 
 

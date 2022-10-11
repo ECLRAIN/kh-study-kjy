@@ -70,6 +70,7 @@ public class AdminController {
 //		model.addAttribute("list", musicDao.releaseByYear());
 		model.addAttribute("list", musicDao.releaseByYearWithRank());
 		return "admin/music/release";
+//		테스트
 	}
 	
 }

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="./commons.css">
+    <link rel="stylesheet" type="text/css" href="./reset.css">
+    <style>
+        .btn.btn-positive[disabled],
+        .btn.btn-positive[disabled]:hover{
+            background-color: aqua;
+        
+        }
+    </style>
+    <script type="text/javascript">
+        //자바스크립트 코드
+        //필수 동의 항목에 대한 체크 여부 검사 및 버튼 활성화 처리
+        function checkagree(){
+            var agreeBoxList = document.querySelectorAll(".ck-required"); //필수만 
+            
+            var count =0;
+            for(var i=0; i<agreeBoxList; i++){
+                agreeBoxList[i].checked=agreeBoxList.checked;
+                console.log(agreeBoxList);
+            }
+            console.log(agreeBoxList);
+        }
+    </script>
+
+</head>
+<body>
+
+    <!-- HTML 화면 -->
+    <div class="container-500">
+        <div class="row center mt-50">
+            <h1>이용약관</h1>
+        </div>
+
+        <div class="row">
+            <h2>제목 자리</h2>
+        </div>
+        <div class="row">
+            <textarea class="input w-100 fix-size" row="6" readonly>어쩌구저쩌구</textarea>
+        </div>
+        <div class="row">
+            <label>
+                <input class="ck ck-required" type="checkbox" name="agree" value="type1" oninput="checkagree();">동의합니다<span style="color: red;">*</span>
+            </label>
+        </div>
+
+        <div class="row">
+            <h2>제목 자리</h2>
+        </div>
+        <div class="row">
+            <textarea class="input w-100 fix-size" row="6" readonly>어쩌구저쩌구</textarea>
+        </div>
+        <div class="row">
+            <label>
+                <input class="ck ck-required" type="checkbox" name="agree" value="type1" oninput="checkagree();">동의합니다<span style="color: red;">*</span>
+            </label>
+        </div>
+
+        <div class="row">
+            <h2>제목 자리</h2>
+        </div>
+        <div class="row">
+            <textarea class="input w-100 fix-size" row="6" readonly>어쩌구저쩌구</textarea>
+        </div>
+        <div class="row">
+            <label>
+                <input class="ck" type="checkbox" name="agree" value="type1">동의합니다<span style="color: #888;">*</span>
+            </label>
+        </div>
+
+        <div class="row mt-50">
+            <button class="btn w-100" disabled>동의합니다</button>
+        </div>
+    </div>
+</body>
+</html>

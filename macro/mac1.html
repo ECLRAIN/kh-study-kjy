@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<title> 오토 방문수 증가 매크로 </title>
+		<meta charset="UTF-8"> // #1
+		<meta http-equiv="refresh" content="1920;" /> // #2
+		<script language="JavaScript">
+			var article = Math.floor(70000+Math.random()*9998); // #3
+			var url = 'http://cafe.naver.com/ofad/'+article; // #4
+			
+			var cafe;
+            
+			function autoF() { // #5
+				cafe=window.open(url,'_blank'); // #6
+				setTimeout("cafe.close()",5000); // #7
+			}
+
+		</script>
+	</head>
+
+	<body onLoad="autoF()"> // #8
+		<!-- 이 화면 끄면 안돼 -->
+		<!-- 그냥 켜진 상태로 둬야 해 -->
+	</body>
+</html>

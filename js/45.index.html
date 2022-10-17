@@ -9,21 +9,39 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-    
+
     <link rel="stylesheet" type="text/css" href="reset.css">
     <link rel="stylesheet" type="text/css" href="commons.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
+
     <!-- jquery를 사용하기 위하여 라이브러리 js 파일을 불러온다-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
     <script type="text/javascript">
-
+        $(function(){
+            $("li.droper").click(function(){
+                $(".rule").toggle();
+            });
+        });
     </script>
 
 </head>
 <body>
 
     <!-- HTML 화면 -->
-    
+    <div class="container-500 mt-40">
+        <div class="row">
+            <li class="droper">
+                <a href="#">Spring</a>
+                <ul>
+                    <li class="rule"><a href="#">Controller</a></li>
+                    <li class="rule"><a href="#">Service</a></li>
+                    <li class="rule"><a href="#">Component</a></li>
+                    <li class="rule"><a href="#">Repository</a></li>
+                    <li class="rule"><a href="#">DTO</a></li>
+                </ul>
+                
+            </li>
+        </div>
+
+    </div>
 </body>
 </html>

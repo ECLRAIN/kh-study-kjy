@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>금액 계산 문제</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,13 +16,71 @@
     <!-- jquery를 사용하기 위하여 라이브러리 js 파일을 불러온다-->
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
     <script type="text/javascript">
-        
+        $(function(){
+            $("select[name=fruit]").on("input", function(){
+                var price = $(this).val();  // 셀렉트를 디스로 지정
+                var qty = $("input[name=qty]").val(); //수량
+
+                //console.log("price = " + parseInt(price));
+                //console.log("price = " + $.isNumeric(price));
+
+                //if(isNan(parseInt(price))) return;//Javascript 스타일
+
+                if(!$.isNumeric(price)) return;//jQuery 
+                //(price)가 숫자 값을 나타내는지에 대한 여부를 확인합니다.
+                //정수 값을 가지지 못한다면 돌려보낸다
+                if(!$.isNumeric(qty)) return;
+
+                var result = parseInt(price) * parseInt(qty);
+                //프라이스와 qty를 숫자형으로 반환하고
+                // 반환 한 숫자형태의 값을 result에 저장
+                
+                $(".total").text(result);
+
+            });
+            $("input[name=qty]").on("input", function(){
+                var price = $("select[name=fruit]").val();
+                var qty = $(this).val();
+
+                if(!$.isNumeric(price)) return;//jQuery 스타일
+                if(!$.isNumeric(qty)) return;
+
+                var result = parseInt(price) * parseInt(qty);
+                $(".total").text(result);
+            });
+        });
     </script>
 
 </head>
 <body>
 
     <!-- HTML 화면 -->
+    <div class="container-500">
+        <div class="row">
+            <h1>금액 계산</h1>
+        </div>
+
+        <div class="row">
+            <label>상품</label>
+            <select name="fruit" class="input w-100">
+                <option value="">과일 선택</option>
+                <option value="500">바나나(500원)</option>
+                <option value="700">딸기(700원)</option>
+                <option value="900">포도(900원)</option>
+            </select>
+        </div>
+
+        <div class="row">
+            <label>수량</label>
+            <input type="number" class="input w-100" name="qty" value="1">
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <h2>금액 : <span class="total">?</span>원</h2>
+        </div>
+    </div>
     
 </body>
 </html>

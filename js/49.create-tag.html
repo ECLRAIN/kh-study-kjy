@@ -12,18 +12,51 @@
     
     <link rel="stylesheet" type="text/css" href="reset.css">
     <link rel="stylesheet" type="text/css" href="commons.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
+    
     <!-- jquery를 사용하기 위하여 라이브러리 js 파일을 불러온다-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
     <script type="text/javascript">
+        $(function(){
+            //버튼을 누르면 입력창의 값을 불러온다음 태그를 만들고 설정한 뒤 리스트에 추가
+            $("#btn-add").click(function(){
+                var item=$("#user-input").val();
+                if(!item.trim())return;
 
+                // $("<li>").text(item).appendTo("#to-do-list");
+                    //왼쪽에 있는거 오른쪽에 붙여라
+            });
+        });
     </script>
 
 </head>
 <body>
 
     <!-- HTML 화면 -->
-    
+    <div class="container-500">
+
+        <div class="row center">
+            <h1>to do list</h1>
+        </div>
+
+        <div class="row">
+            <input type="text" id="user-input" class="input w-100">
+        </div>
+
+        <div class="row right">
+        <button class="btn" id="btn-add">
+            <i class="fa-solid fa-plus"></i>
+            추가
+        </button>
+        </div>
+
+
+    </div>
+        
+        <hr>
+    <div class="row">
+        <ul id="to-do-list"></ul>
+    </div>
+
 </body>
 </html>

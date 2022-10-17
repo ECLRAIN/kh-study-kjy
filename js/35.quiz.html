@@ -12,18 +12,35 @@
 
     <link rel="stylesheet" type="text/css" href="reset.css">
     <link rel="stylesheet" type="text/css" href="commons.css">
-    <style>
-        textarea{
-            resize: none;
-        }
-    </style>
+
     <!-- jquery를 사용하기 위하여 라이브러리 js 파일을 불러온다-->
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
     <script type="text/javascript">
         $(function(){
-            $(".test-textarea").input(function(){
-                
-            });  
+            //(+주의) input 이벤트는 나중에 나와서 약식 명령이 없음
+            //$(".q1-input").input(function(){});//안됨
+            $(".q1-input").on("input", function(){
+                //this == 입력이 발생한 textarea
+                //this는 이벤트를 시작한 주인공
+                //var text = $(".q1-input").val();//비추천
+                //var text = this.value;//Javascript 스타일
+                var text = $(this).val();//jQuery 스타일
+
+                //console.log(text1);
+                console.log("text="+text);
+                console.log("text.length="+text.length);
+                //console.log(this);
+               
+                //$(".q1-input-length").text(text.length);//모든 span(비추천)
+                $(this).next().text(text.length);//바로 뒤 태그 선택 .next() (<---> .prev())
+                //console.log($(this).next().text(text1.length));
+                if(text.length > 1000){
+                    $(this).next().css("color", "red");
+                }
+                else {
+                    $(this).next().css("color", "blue");
+                }
+            });
         });
     </script>
 
@@ -31,16 +48,35 @@
 <body>
 
     <!-- HTML 화면 -->
-    <div class="container-600 mt-50">
-        <div class="row left">
-            <h1>Q. 우리 회사에 지원한 동기를 작성하세요</h1>
+    <div class="container-600">
+        <div class="row center">
+            <h1>자기소개서</h1>
         </div>
-        <div class="row">
-            <textarea class="test-textarea w-100" rows="10"></textarea>
+
+        <div class="row mt-40">
+            <h2>(Q) 우리 회사에 지원한 이유가 뭔가요?</h2>
         </div>
-        <div class="right"> 
-            <span class="cnt">0</span> / 1000
+        <div class="row right">
+            <textarea class="input w-100 fix-size q1-input" rows="10"></textarea>
+            <span class="q1-input-length">0</span> / 1000
+        </div>
+
+        <div class="row mt-40">
+            <h2>(Q) 우리 회사에 지원한 이유가 뭔가요?</h2>
+        </div>
+        <div class="row right">
+            <textarea class="input w-100 fix-size q1-input" rows="10"></textarea>
+            <span class="q1-input-length">0</span> / 1000
+        </div>
+
+        <div class="row mt-40">
+            <h2>(Q) 우리 회사에 지원한 이유가 뭔가요?</h2>
+        </div>
+        <div class="row right">
+            <textarea class="input w-100 fix-size q1-input" rows="10"></textarea>
+            <span class="q1-input-length">0</span> / 1000
         </div>
     </div>
+    
 </body>
 </html>

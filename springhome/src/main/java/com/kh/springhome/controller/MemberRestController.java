@@ -13,7 +13,7 @@ import com.kh.springhome.repository.MemberDao;
 //화면 없이 사용자 요청을 처리해서 데이터만 전송하는 컨트롤러
 
 //CrossOrigin 어노테이션을 붙이면 외부의 접근이 허용된다
-@CrossOrigin(origins = {"http://127.0.0.1:5500"}) //괄호 안은 특정 주소만 허용
+@CrossOrigin(origins = {"http://127.0.0.1:5500"}) //괄호 안은 특정 주소만 허용한다
 @RestController//@Controller + @ResponseBody
 @RequestMapping("/rest/member")
 public class MemberRestController {

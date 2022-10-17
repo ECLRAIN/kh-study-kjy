@@ -19,8 +19,8 @@ public interface MusicDao {
 	
 	List<MusicYearCountVO> releaseByYear();
 	List<MusicYearCountVO> releaseByYearWithRank();
+	List<MusicDto> selectListForMain();
 }
-
 
 
 

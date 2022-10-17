@@ -23,6 +23,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.springhome.constant.SessionConstant;
 import com.kh.springhome.entity.MemberDto;
 import com.kh.springhome.error.TargetNotFoundException;
+import com.kh.springhome.repository.BoardDao;
+import com.kh.springhome.repository.MemberBoardLikeDao;
 import com.kh.springhome.repository.MemberDao;
 
 @Controller
@@ -32,26 +34,35 @@ public class MemberController {
 	@Autowired
 	private MemberDao memberDao;
 	
+	@Autowired
+	private BoardDao boardDao;
+	
+	@Autowired
+	private MemberBoardLikeDao memberBoardLikeDao;
+	
 	@GetMapping("/join")
 	public String join() {
 //		return "/WEB-INF/views/member/join.jsp";
 		return "member/join";
 	}
-	//(추가) 첨부파일을 받아서 저장
+	
+//	(+추가) 첨부파일을 받아서 저장
 	@PostMapping("/join")
-	public String join(@ModelAttribute MemberDto memberDto, 
+	public String join(
+			@ModelAttribute MemberDto memberDto,
 			@RequestParam MultipartFile memberProfile) throws IllegalStateException, IOException {
-//		데이터베이스 저장
+		//데이터베이스 등록
 		memberDao.insert(memberDto);
 		
-		if(!memberProfile.isEmpty()) { //첨부파일이 있다면
-		//프로필 저장
-		File directory = new File("D:/upload/member");
-		directory.mkdirs();
-		File target= new File(directory, memberDto.getMemberId());
-		memberProfile.transferTo(target);
+		if(!memberProfile.isEmpty()) {//첨부파일이 있다면
+			//프로필 저장
+			File directory = new File("D:/upload/member");
+			directory.mkdirs();
+			File target = new File(directory, memberDto.getMemberId());
+			memberProfile.transferTo(target);
 		}
-		return "redirect:join_finish"; //
+		
+		return "redirect:join_finish";
 	}
 	
 	@GetMapping("/join_finish")
@@ -189,6 +200,12 @@ public class MemberController {
 		//3. 불러온 회원 정보를 모델에 첨부한다
 		model.addAttribute("memberDto", memberDto);
 		
+		//(+추가) 내가 작성한 게시글 최근순 5개 조회
+		model.addAttribute("writeBoardList", boardDao.selectWriteList(loginId, 1, 10));
+		
+		//(+추가) 내가 좋아요한 게시글 최근순 5개 조회
+		model.addAttribute("likeBoardList", boardDao.selectLikeList(loginId, 1, 10));
+		
 		//4. 화면(View)으로 전달(Forward)한다
 		//(참고) 기존에 사용하던 회원상세(detail.jsp) 뷰와 같이 사용
 		//return "/WEB-INF/views/member/detail.jsp";
@@ -305,36 +322,46 @@ public class MemberController {
 //		return "/WEB-INF/views/member/goodbyeResult.jsp";
 		return "member/goodbyeResult";
 	}
-	//특정 사용자의 프로필 이미지를 다운로드하는 매핑
-//		전송을 하려면화면을 무시하는 설정을 해야함(@ResponseBody)
-//		전송을 부탁하려면 ResponseEntity 형태가 반환되어야 한다
+	
+//	(+추가) 특정 사용자의 프로필 이미지를 다운로드하는 매핑
+//	- 다운로드란 현재의 서버에서 사용자에게 파일을 전송하는 것
+//	- 전송을 하려면 화면을 무시하는 설정을 해야함(@ResponseBody)
+//	- 전송을 부탁하려면 ResponseEntity<ByteArrayResource> 형태가 반환되어야 한다
+	
 	@GetMapping("/download")
 	@ResponseBody
-	public ResponseEntity<ByteArrayResource> download(@RequestParam String memberId) throws IOException {
-		//파일 찾기
-		File directory =new File("D:/upload/member");
+	public ResponseEntity<ByteArrayResource> download(
+										@RequestParam String memberId) throws IOException {
+		//[1] 파일 찾기
+		File directory = new File("D:/upload/member");
 		File target = new File(directory, memberId);
-		//파일이 존재하는지
-		if(target.exists()) {//해당 파일의 내용을 불러온다 의존성 필요 apache commons io
+		
+		if(target.exists()) {//파일 존재
+			//[2] 해당 파일의 내용을 불러온다(apache commons io 의존성 필요)
 			byte[] data = FileUtils.readFileToByteArray(target);
 			ByteArrayResource resource = new ByteArrayResource(data);
 			
-			//사용자에게 보낼 응답 생성
-			//header에는 보낼 파일의 정보를, body에는 보낼 파일의 내용을 첨부
-			return ResponseEntity.ok() //브라우저에게 사용법을 알려주기 위한 
-													.header("Content-Encoding", "UTF-8")  //해석
-													.header("Content-Length", String.valueOf(data.length)) //퍼센트
-													.header("Content-Dispostion", "attachment; filename="+memberId) // 이 파일에 직접 접속해서 다운로드 해라
-													.header("Content-type", "application/octet-stream")
-													.body(resource);
+			//[3] 사용자에게 보낼 응답 생성
+			//- header에는 보낼 파일의 정보를, body에는 보낼 파일의 내용을 첨부
+			return ResponseEntity.ok()
+			.header("Content-Encoding", "UTF-8")
+			.header("Content-Length", String.valueOf(data.length))
+			.header("Content-Disposition", "attachment; filename="+memberId)
+			.header("Content-Type", "application/octet-stream")
+			.body(resource);
 		}
-		else {//파일이 없다면
-			//개발자가 지정한 예외를 발생시키는 방법
-			throw new TargetNotFoundException("프로필없음");
+		else {//파일 없음
+			//1) 우리가 정한 예외를 발생시키는 방법
+			throw new TargetNotFoundException("프로필 없음");
+			
+			//2) 사용자에게 못찾았음(404)을 전송
 			//return ResponseEntity.notFound().build();
 		}
 	}
 }
+
+
+
 
 
 

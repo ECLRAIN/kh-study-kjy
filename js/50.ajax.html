@@ -53,6 +53,24 @@
 
             });
 
+            $("input[name=memberNick]").blur(function(){
+
+                var memberNick = $(this).val();
+                if(!memberNick) return;
+
+                $.ajax({
+                    url:"http://localhost:8888/rest/member/nick?memberNick="+memberNick,
+                    method: "get",
+                    success:function(resp){
+                        if(resp == "NNNNY"){
+                            $("input[name=memberNick]").next("span").text("사용할 수 있는 닉네임입니다");
+                        }
+                        else if(resp == "NNNNN"){
+                            $("input[name=memberNick]").next("span").text("이미 사용중인 닉네임입니다");
+                        }
+                    }
+                });
+            });
         });
     </script>
 
@@ -90,6 +108,13 @@
             <input type="text" name="memberId" class="input w-100">
             <span></span>
         </div>
+        <div class="row">
+            <label>닉네임</label>
+            <input type="text" name="memberNick" class="input w-100">
+            <span></span>
+        </div>
+
+        
     </div>
     
 </body>
